@@ -2,7 +2,10 @@
   "name": "systems-analysis",
   "version": "0.1.0",
   "description": "Frameworks for modeling systems before intervening: epistemic discipline (Hacking), regulatory analysis (Ashby), and causal identification (Pearl).",
-  "author": "Jack Willis",
+  "author": {
+    "name": "Jack Willis",
+    "email": "jack@attac.us"
+  },
   "license": "MIT",
   "keywords": [
     "systems",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "systems-analysis",
-  "description": "Systems analysis skills from Hacking, Ashby, and Pearl.",
+  "name": "jackwillis",
+  "description": "Claude Code plugins by Jack Willis.",
   "owner": {
     "name": "Jack Willis",
     "email": "jack@attac.us"
