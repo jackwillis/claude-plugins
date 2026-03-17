@@ -1,9 +1,16 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "systems-analysis",
+  "description": "Systems analysis skills from Hacking, Ashby, and Pearl.",
+  "owner": {
+    "name": "Jack Willis",
+    "email": "jack@attac.us"
+  },
   "plugins": [
     {
       "name": "systems-analysis",
-      "path": "."
+      "description": "Frameworks for modeling systems before intervening: epistemic discipline (Hacking), regulatory analysis (Ashby), and causal identification (Pearl).",
+      "source": "./"
     }
   ]
 }

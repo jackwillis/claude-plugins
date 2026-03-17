@@ -20,19 +20,19 @@ Model the system before intervening. All three skills enforce this in different 
 
 ## Skills
 
-### representing-and-intervening
+### Representing and Intervening
 
 Epistemic discipline for debugging. Based on Ian Hacking's *Representing and Intervening*: you must model a system before predicting its behavior, and predict before intervening. Check whether you're solving the right problem before solving it (Schon). Update decisions distinguish single-loop from double-loop learning (Argyris).
 
 Triggers on: "why is this happening", "help me debug", unexplained gaps between expected and observed behavior.
 
-### requisite-variety
+### Requisite Variety
 
 Regulatory analysis for control systems. Based on Ashby's *Introduction to Cybernetics* (1956) and Conant & Ashby's Good Regulator theorem (1970). Three principles applied in order: requisite variety (capacity), good regulator (structure), constraints (tractability). Includes error-controlled regulation limits and the D/R/T/E/η framework.
 
 Triggers on: "why can't we control this", regulation failure, alert fatigue, oscillating controllers, scaling limits.
 
-### design-causal-study
+### Design a Causal Study
 
 Causal identification before study design. Based on Pearl's causal inference framework. Seven steps from estimand definition through DAG construction, backdoor paths, collider checks, to threat assessment. Prevents the most common causal reasoning errors (mediator adjustment, collider conditioning, skipping the estimand).
 
