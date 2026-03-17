@@ -22,9 +22,7 @@ Reboot Claude after installing plugins to load new skills.
 /plugin install systems-analysis@jackwillis
 ```
 
-AI coding agents are biased toward action and toward agreement. They'll try a fix before understanding why something broke, add more rules when the problem is that rules can't keep up, or draw causal conclusions from correlations. Worse, [LLMs agree with user framing 88% of the time](https://arxiv.org/abs/2505.13995) — so if you frame the problem wrong, the agent will run with it rather than questioning it.
-
-These are the same mistakes humans make, just faster and more agreeable.
+AI coding agents are biased toward action. They'll try a fix before understanding why something broke, add more rules when the problem is that rules can't keep up, or draw causal conclusions from correlations. These are the same mistakes humans make, just faster.
 
 This plugin adds three skills that enforce one shared discipline: **model the system before intervening.** Skills activate automatically when Claude detects a matching situation, and can also be invoked directly.
 
@@ -82,7 +80,6 @@ These skills focus on *when to stop and think* — they don't manage plans, task
 - Schon, D. (1983). *The Reflective Practitioner.*
 - Argyris, C. & Schon, D. (1978). *Organizational Learning.*
 - Pearl, J. & Mackenzie, D. (2018). *The Book of Why.*
-- Cheng, M. et al. (2025). "ELEPHANT: Measuring Social Sycophancy in LLMs." [arXiv:2505.13995](https://arxiv.org/abs/2505.13995).
 
 ## License
 
