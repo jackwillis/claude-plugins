@@ -1,6 +1,6 @@
 # Jack's Claude Code Plugins
 
-![Claude Code Plugins](assets/header.svg)
+<img src="assets/header.svg" align="left" width="160">
 
 Skills that make Claude stop and think before acting — model the system, check the data, extract the content.
 
@@ -22,7 +22,7 @@ Reboot Claude after installing plugins to load new skills.
 /plugin install systems-analysis@jackwillis
 ```
 
-![systems-analysis](assets/systems-analysis.svg)
+<img src="assets/systems-analysis.svg" align="left" width="120">
 
 AI coding agents are biased toward action. They'll try a fix before understanding why something broke, add more rules when the problem is that rules can't keep up, or draw causal conclusions from correlations. These are the same mistakes humans make, just faster.
 
@@ -87,7 +87,7 @@ These skills focus on *when to stop and think* — they don't manage plans, task
 /plugin install text-utils@jackwillis
 ```
 
-![text-utils](assets/text-utils.svg)
+<img src="assets/text-utils.svg" align="left" width="120">
 
 Three skills for getting text in and out of formats without wasting context. Themes are customizable — edit the shipped CSS or drop in your own. Requires `pandoc`, `weasyprint`, `poppler` (for `pdftotext`). Optional: `tesseract` (OCR), `trafilatura` (article extraction).
 
