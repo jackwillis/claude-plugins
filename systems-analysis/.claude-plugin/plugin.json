@@ -1,7 +1,7 @@
 {
   "name": "systems-analysis",
   "version": "0.1.0",
-  "description": "Frameworks for modeling systems before intervening: epistemic discipline (Hacking), regulatory analysis (Ashby), and causal identification (Pearl).",
+  "description": "Frameworks for modeling systems before intervening: epistemic discipline (Hacking), regulatory analysis (Ashby), causal identification (Pearl), and frame-assumption auditing (Fodor/Dennett).",
   "author": {
     "name": "Jack Willis",
     "email": "jack@attac.us"
@@ -13,6 +13,8 @@
     "regulation",
     "causality",
     "cybernetics",
-    "epistemology"
+    "epistemology",
+    "frame-problem",
+    "assumptions"
   ]
 }
