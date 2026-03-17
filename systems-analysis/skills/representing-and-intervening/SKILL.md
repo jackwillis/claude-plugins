@@ -78,6 +78,7 @@ Stop and return to Represent if you catch yourself:
 - **Represent phase needs causal structure from observational data** (confounders, selection bias) → switch to **design-causal-study**.
 - **Production is down, what broke?** → use **systematic-debugging** (forensic, not epistemic).
 - **Update reveals structural revision** — the model was wrong, not miscalibrated. If **brainstorming** is available, use it to explore the problem space before committing to a new model.
+- **Assumptions feel stale or unexamined** — you have a model but haven't checked whether the world still matches it → switch to **frame-problem**.
 - **Model is solid, intervention plan is clear** — if **writing-plans** is available, use it to structure the fix. For multi-step fixes, **executing-plans** or **subagent-driven-development** can carry it out.
 
 R&I is epistemic: *how does this work, and what will happen if I change it?*
