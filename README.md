@@ -72,7 +72,7 @@ Before claiming X causes Y, define exactly what you're measuring, draw the causa
 
 <img src="assets/frame-problem.svg" align="left" width="120">
 
-Every action and every line of reasoning assumes a frame — things you take to stay the same. This skill forces you to make those assumptions explicit so they can be checked. Name what you're holding constant, check whether it's still true, question whether you're solving the right problem, and admit what your current vocabulary can't see. Recognizes three failure modes from Dennett's robot thought experiment: ignoring side effects (R1), considering everything (R1D1), and meta-paralysis over relevance (R2D1).
+Every action and every line of reasoning assumes a frame — things you take to stay the same. This skill forces you to make those assumptions explicit so they can be checked. Name what you're holding constant, check whether it's still true, question whether you're solving the right problem, and admit what your current way of thinking can't see. Recognizes three failure modes from Dennett's robot thought experiment: ignoring side effects (R1), considering everything (R1D1), and getting stuck deciding what's relevant (R2D1).
 
 **Use when:** stale state, inherited problem framing, confidence without re-verification, any gap between when information was gathered and when it's being used. Based on Fodor (1987), Dennett (1984), Hayes (1973).
 
