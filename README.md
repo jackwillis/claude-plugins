@@ -10,11 +10,13 @@ Add the marketplace, then install any plugin:
 
 Reboot Claude after installing plugins to load new skills.
 
+![Claude Code Plugins](assets/header.svg)
+
 ## Plugins
 
 ### Systems Analysis
 
-**Make your agent think before it acts.**
+![systems-analysis](assets/systems-analysis.svg)
 
 ```
 /plugin install systems-analysis@jackwillis
@@ -87,7 +89,7 @@ These skills focus on *when to stop and think* — they don't manage plans, task
 
 ### Text Utils
 
-**Efficient text extraction and format conversion.**
+![text-utils](assets/text-utils.svg)
 
 ```
 /plugin install text-utils@jackwillis
@@ -98,9 +100,9 @@ Three skills for getting text in and out of formats without wasting context. The
 **Dependencies:** `pandoc`, `weasyprint`, `poppler` (for `pdftotext`). Optional: `tesseract` (OCR), `trafilatura` (article extraction).
 
 ```bash
-brew install pandoc weasyprint poppler qpdf    # core
-brew install tesseract                          # optional: OCR
-pipx install trafilatura                        # optional: article extraction
+brew install pandoc weasyprint poppler qpdf # core
+brew install tesseract                      # optional: OCR
+pipx install trafilatura                    # optional: article extraction
 ```
 
 #### Fetch Markdown
