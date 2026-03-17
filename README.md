@@ -4,13 +4,7 @@ Claude Code plugin for systems analysis.
 
 AI coding agents are biased toward action — they'll try a fix before understanding why something broke, add more rules when the problem is that rules can't keep up, or draw causal conclusions from correlations. These are the same mistakes humans make, just faster.
 
-This plugin adds three skills that enforce one shared discipline: **model the system before intervening.** Each applies this in a different domain:
-
-| Skill | Domain | Enforces |
-|-------|--------|----------|
-| **representing-and-intervening** | Debugging and diagnosis | Represent → Predict → Intervene. No fix without a written prediction. |
-| **requisite-variety** | Regulation and control | Name D/R/T/E/η. Check variety, then model, then constraints. |
-| **design-causal-study** | Causal claims | Define estimand → Draw DAG → Check identifiability. No study without structure. |
+This plugin adds three skills that enforce one shared discipline: **model the system before intervening.**
 
 ## Install
 
@@ -22,32 +16,25 @@ This plugin adds three skills that enforce one shared discipline: **model the sy
 
 ### Representing and Intervening
 
-Epistemic discipline for debugging. Based on Ian Hacking's *Representing and Intervening*: you must model a system before predicting its behavior, and predict before intervening. Check whether you're solving the right problem before solving it (Schon). Update decisions distinguish single-loop from double-loop learning (Argyris).
+State what you think is happening, predict what you should see, then test one thing at a time. Forces you to enumerate available tests (REPL, spec, logs, query inspection) before grabbing the first one. When a prediction fails, asks whether the model is structurally wrong or just miscalibrated — the difference between rethinking your approach and tuning a parameter (Hacking, Schon, Argyris).
 
-Triggers on: "why is this happening", "help me debug", unexplained gaps between expected and observed behavior.
+Use when: "why is this happening", "help me debug", unexplained gaps between expected and observed behavior.
 
 ### Requisite Variety
 
-Regulatory analysis for control systems. Based on Ashby's *Introduction to Cybernetics* (1956) and Conant & Ashby's Good Regulator theorem (1970). Three principles applied in order: requisite variety (capacity), good regulator (structure), constraints (tractability). Includes error-controlled regulation limits and the D/R/T/E/η framework.
+When a control system keeps failing despite more rules, more alerts, more checks — this skill asks whether the controller has enough response variety to match its disturbances, whether it contains a model of what it's controlling, and whether you can find structure in the problem that makes it tractable. Three principles applied in order: capacity, then structure, then constraints (Ashby, Conant & Ashby).
 
-Triggers on: "why can't we control this", regulation failure, alert fatigue, oscillating controllers, scaling limits.
+Use when: "why can't we control this", regulation failure, alert fatigue, whack-a-mole against adaptive adversaries.
 
 ### Design a Causal Study
 
-Causal identification before study design. Based on Pearl's causal inference framework. Seven steps from estimand definition through DAG construction, backdoor paths, collider checks, to threat assessment. Prevents the most common causal reasoning errors (mediator adjustment, collider conditioning, skipping the estimand).
+Before claiming X causes Y, define exactly what you're measuring, draw the causal structure, and check whether the data can actually answer the question. Seven steps that prevent the most common errors: adjusting for variables on the causal path, conditioning on colliders, and skipping the estimand entirely (Pearl).
 
-Triggers on: "does X cause Y", "should we change X to improve Y", correlation-vs-causation questions.
+Use when: "does X cause Y", "should we change X to improve Y", drawing conclusions from observational data.
 
-## Transitions between skills
+### Transitions
 
-Each skill includes transition signals — conditions under which the current skill's output becomes the entry point for another:
-
-- **R&I → requisite-variety**: Model reveals a regulation problem (regulator can't match disturbance variety)
-- **R&I → design-causal-study**: Represent phase needs causal structure from observational data
-- **requisite-variety → R&I**: Can't name D/R/T/E/η (need a model first)
-- **requisite-variety → design-causal-study**: Need to establish a causal link before designing the regulator
-- **design-causal-study → R&I**: Question is "why is this behaving this way" rather than "does X cause Y"
-- **design-causal-study → requisite-variety**: Causal structure reveals a regulation problem
+Each skill includes transition signals. Debugging may reveal a regulation problem; regulation may need causal evidence; a causal question may turn out to be "why is this behaving this way" — and the skills hand off to each other at those points.
 
 ## Sources
 
@@ -56,7 +43,7 @@ Each skill includes transition signals — conditions under which the current sk
 - Conant, R.C. & Ashby, W.R. (1970). "Every good regulator of a system must be a model of that system."
 - Schon, D. (1983). *The Reflective Practitioner.*
 - Argyris, C. & Schon, D. (1978). *Organizational Learning.*
-- Pearl, J. (2009). *Causality: Models, Reasoning, and Inference.*
+- Pearl, J. & Mackenzie, D. (2018). *The Book of Why.*
 
 ## License
 
