@@ -18,11 +18,11 @@ Reboot Claude after installing plugins to load new skills.
 
 ### Systems Analysis
 
-![systems-analysis](assets/systems-analysis.svg)
-
 ```
 /plugin install systems-analysis@jackwillis
 ```
+
+![systems-analysis](assets/systems-analysis.svg)
 
 AI coding agents are biased toward action. They'll try a fix before understanding why something broke, add more rules when the problem is that rules can't keep up, or draw causal conclusions from correlations. These are the same mistakes humans make, just faster.
 
@@ -30,11 +30,11 @@ This plugin adds three skills that enforce one shared discipline: **model the sy
 
 #### Representing and Intervening
 
-![representing-and-intervening](assets/representing-and-intervening.svg)
-
 ```
 /representing-and-intervening
 ```
+
+![representing-and-intervening](assets/representing-and-intervening.svg)
 
 State what you think is happening, predict what you should see, then test one thing at a time. Forces you to enumerate available tests (script runner, spec, logs, query inspection) before grabbing the first one. When a prediction fails, asks whether the model is structurally wrong or just miscalibrated — the difference between rethinking your approach and tuning a parameter.
 
@@ -42,11 +42,12 @@ State what you think is happening, predict what you should see, then test one th
 
 #### Requisite Variety
 
-![requisite-variety](assets/requisite-variety.svg)
-
 ```
 /requisite-variety
 ```
+
+![requisite-variety](assets/requisite-variety.svg)
+
 
 When a control system keeps failing despite more rules, more alerts, more checks — this skill asks whether the controller has enough response variety to match its disturbances, whether it contains a model of what it's controlling, and whether you can find structure in the problem that makes it tractable. Three principles applied in order: capacity, then structure, then constraints.
 
@@ -54,11 +55,11 @@ When a control system keeps failing despite more rules, more alerts, more checks
 
 #### Design a Causal Study
 
-![design-causal-study](assets/design-causal-study.svg)
-
 ```
 /design-causal-study
 ```
+
+![design-causal-study](assets/design-causal-study.svg)
 
 Before claiming X causes Y, define exactly what you're measuring, draw the causal structure, and check whether the data can actually answer the question. Seven steps that prevent the most common errors: adjusting for variables on the causal path, conditioning on colliders, and skipping the estimand entirely.
 
@@ -70,23 +71,24 @@ Each skill includes transition signals. Debugging may reveal a regulation proble
 
 #### Works well with Superpowers
 
+```
+/plugin install superpowers@claude-plugins-official
+```
+
 These skills focus on *when to stop and think* — they don't manage plans, tasks, or execution. For that, pair them with [Superpowers](https://github.com/obra/superpowers):
 
 - **Brainstorming** — explore the problem space before committing to an approach. Systems-analysis skills then pressure-test whatever direction you choose.
 - **Writing Plans** — turn your model into a structured plan. Representing and Intervening builds the model; Writing Plans turns it into steps.
 - **Executing Plans** — execute with review checkpoints. The analysis skills catch when execution reveals a wrong model.
 
-```
-/plugin install superpowers@claude-plugins-official
-```
 
 ### Text Utils
-
-![text-utils](assets/text-utils.svg)
 
 ```
 /plugin install text-utils@jackwillis
 ```
+
+![text-utils](assets/text-utils.svg)
 
 Three skills for getting text in and out of formats without wasting context. Themes are customizable — edit the shipped CSS or drop in your own. Requires `pandoc`, `weasyprint`, `poppler` (for `pdftotext`). Optional: `tesseract` (OCR), `trafilatura` (article extraction).
 
@@ -126,11 +128,11 @@ Render markdown to styled PDF using pandoc + weasyprint + CSS. Ships with three 
 
 #### Read PDF
 
-![read-pdf](assets/read-pdf.svg)
-
 ```
 /read-pdf
 ```
+
+![read-pdf](assets/read-pdf.svg)
 
 Extract text from PDFs. Tries `pdftotext` first (fast, digital PDFs), falls back to OCR via `tesseract` for scanned documents. Detects which is needed automatically.
 
