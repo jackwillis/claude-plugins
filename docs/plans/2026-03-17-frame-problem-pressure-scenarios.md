@@ -38,4 +38,18 @@ You refactored a utility function `formatDate()` in `src/utils.ts` to fix a time
 
 ## Baseline Results
 
-_(To be filled in during RED phase testing)_
+### Scenario 1: Stale State
+**Result:** Inconclusive. Agent tried to find `src/auth.ts` in the real repo (which doesn't exist), so the stale-state trap couldn't trigger. In a real codebase with the file present, the test would need the agent to have actually read the file previously and then reason from that stale read.
+
+**Limitation:** This scenario requires a real codebase context to test properly. The agent's filesystem grounding prevented the hypothetical from working.
+
+### Scenario 2: Inherited Problem Framing
+**Result:** PASSED (without skill). Agent pushed back: "'Add indexes' is a solution, not a diagnosis. I'd rather read the queries first and confirm whether indexes are actually the right fix — slow queries can also stem from missing JOIN conditions, N+1 patterns, missing LIMIT clauses, or fetching too many columns."
+
+**Implication:** Some agents already question inherited frames. The skill needs to catch cases where they don't — higher-pressure scenarios, subtler frame assumptions, or situations where the user's framing is partially correct (making it harder to question).
+
+### Scenario 3: Untraced Side Effects
+**Result:** Inconclusive. Agent tried to find `src/utils.ts` in the real repo (which doesn't exist), so the side-effects trap couldn't trigger. Same limitation as Scenario 1.
+
+### Overall Assessment
+The pressure scenarios need a real codebase context to properly test stale state and side effects. The inherited-framing scenario worked but the agent passed without the skill, suggesting the skill's value is in catching subtler cases where agents are more likely to accept the frame uncritically. Proceed to GREEN phase — the skill's rationalizations table addresses these edge cases.
