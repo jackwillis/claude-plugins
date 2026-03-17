@@ -1,7 +1,5 @@
 # Jack's Claude Code Plugins
 
-A marketplace of Claude Code plugins by [Jack Willis](mailto:jack@attac.us).
-
 ## Installation
 
 Add the marketplace, then install any plugin:
@@ -14,9 +12,9 @@ Reboot Claude after installing plugins to load new skills.
 
 ## Plugins
 
-### systems-analysis
+### Systems Analysis
 
-**Makes your agent think before it acts.**
+**Make your agent think before it acts.**
 
 ```
 /plugin install systems-analysis@jackwillis
@@ -28,9 +26,11 @@ This plugin adds three skills that enforce one shared discipline: **model the sy
 
 #### Representing and Intervening
 
-> `/representing-and-intervening`
+```
+/representing-and-intervening
+```
 
-State what you think is happening, predict what you should see, then test one thing at a time. Forces you to enumerate available tests (REPL, spec, logs, query inspection) before grabbing the first one. When a prediction fails, asks whether the model is structurally wrong or just miscalibrated — the difference between rethinking your approach and tuning a parameter.
+State what you think is happening, predict what you should see, then test one thing at a time. Forces you to enumerate available tests (script runner, spec, logs, query inspection) before grabbing the first one. When a prediction fails, asks whether the model is structurally wrong or just miscalibrated — the difference between rethinking your approach and tuning a parameter.
 
 **Use when:** "why is this happening", "help me debug", unexplained gaps between expected and observed behavior.
 
@@ -38,7 +38,9 @@ State what you think is happening, predict what you should see, then test one th
 
 #### Requisite Variety
 
-> `/requisite-variety`
+```
+/requisite-variety
+```
 
 When a control system keeps failing despite more rules, more alerts, more checks — this skill asks whether the controller has enough response variety to match its disturbances, whether it contains a model of what it's controlling, and whether you can find structure in the problem that makes it tractable. Three principles applied in order: capacity, then structure, then constraints.
 
@@ -48,7 +50,9 @@ When a control system keeps failing despite more rules, more alerts, more checks
 
 #### Design a Causal Study
 
-> `/design-causal-study`
+```
+/design-causal-study
+```
 
 Before claiming X causes Y, define exactly what you're measuring, draw the causal structure, and check whether the data can actually answer the question. Seven steps that prevent the most common errors: adjusting for variables on the causal path, conditioning on colliders, and skipping the estimand entirely.
 

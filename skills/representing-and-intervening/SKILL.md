@@ -26,7 +26,7 @@ You must model a system before predicting its behavior, and predict before inter
 
 ## Intervention Repertoire
 
-Before picking a test, enumerate what's available: REPL/console, write a spec, read logs, inspect generated queries, add instrumentation, run a benchmark. The first one you think of is rarely the most informative. Pick the one that most directly tests the prediction.
+Before picking a test, enumerate what's available: script runner, write a spec, read logs, inspect generated queries, add instrumentation, run a benchmark. The first one you think of is rarely the most informative. Pick the one that most directly tests the prediction.
 
 ## Problem Setting (Schon)
 
