@@ -1,0 +1,15 @@
+{
+  "name": "systems-analysis",
+  "version": "0.1.0",
+  "description": "Frameworks for modeling systems before intervening: epistemic discipline (Hacking), regulatory analysis (Ashby), and causal identification (Pearl).",
+  "author": "Jack Willis",
+  "license": "MIT",
+  "keywords": [
+    "systems",
+    "debugging",
+    "regulation",
+    "causality",
+    "cybernetics",
+    "epistemology"
+  ]
+}

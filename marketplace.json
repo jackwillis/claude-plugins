@@ -1,0 +1,9 @@
+{
+  "name": "systems-analysis",
+  "plugins": [
+    {
+      "name": "systems-analysis",
+      "path": "."
+    }
+  ]
+}
