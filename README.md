@@ -1,6 +1,6 @@
 # Jack's Claude Code Plugins
 
-<img src="assets/header.svg" align="left" width="160">
+![Claude Code Plugins](assets/header.svg)
 
 Skills that make Claude stop and think before acting — model the system, check the data, extract the content.
 
