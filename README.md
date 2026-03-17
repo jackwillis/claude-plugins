@@ -22,7 +22,7 @@ claude plugin add jackwillis/systems-analysis
 
 ### representing-and-intervening
 
-Epistemic discipline for debugging. Based on Ian Hacking's *Representing and Intervening*: you must model a system before predicting its behavior, and predict before intervening. Includes the Bainbridge Rule (human states model before tools formalize it) and a structure-vs-parameter update decision.
+Epistemic discipline for debugging. Based on Ian Hacking's *Representing and Intervening*: you must model a system before predicting its behavior, and predict before intervening. Humans state their model before tools formalize it (informed by Bainbridge, 1983). Includes a structure-vs-parameter update decision.
 
 Triggers on: "why is this happening", "help me debug", unexplained gaps between expected and observed behavior.
 
@@ -54,6 +54,7 @@ Each skill includes transition signals — conditions under which the current sk
 - Hacking, I. (1983). *Representing and Intervening.*
 - Ashby, W.R. (1956). *An Introduction to Cybernetics.*
 - Conant, R.C. & Ashby, W.R. (1970). "Every good regulator of a system must be a model of that system."
+- Bainbridge, L. (1983). "Ironies of Automation." *Automatica*, 19(6).
 - Pearl, J. (2009). *Causality: Models, Reasoning, and Inference.*
 
 ## License
