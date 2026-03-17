@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="140" viewBox="0 0 160 140">
+  <!-- A hand press/stamp: markdown goes in left, PDF comes out right -->
+
+  <style>
+    .sk { stroke: #2a1a0a; stroke-width: 1.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+
+  <!-- The press machine (central) -->
+  <!-- Base plate -->
+  <rect x="52" y="90" width="56" height="8" rx="2" fill="#888" stroke="#2a1a0a" stroke-width="1.5"/>
+  <!-- Uprights -->
+  <rect x="56" y="38" width="6" height="52" fill="#666" stroke="#2a1a0a" stroke-width="1"/>
+  <rect x="98" y="38" width="6" height="52" fill="#666" stroke="#2a1a0a" stroke-width="1"/>
+  <!-- Top beam -->
+  <rect x="52" y="34" width="56" height="8" rx="2" fill="#888" stroke="#2a1a0a" stroke-width="1.5"/>
+  <!-- Press plate (coming down) -->
+  <rect x="64" y="54" width="32" height="10" rx="1" fill="#555" stroke="#2a1a0a" stroke-width="1.2"/>
+  <!-- Handle wheel on top -->
+  <circle cx="80" cy="28" r="10" fill="none" stroke="#5a3a1a" stroke-width="3"/>
+  <circle cx="80" cy="28" r="2" fill="#5a3a1a"/>
+  <!-- Screw -->
+  <line x1="80" y1="38" x2="80" y2="54" stroke="#888" stroke-width="3"/>
+  <line x1="78" y1="44" x2="82" y2="44" stroke="#666" stroke-width="1"/>
+  <line x1="78" y1="48" x2="82" y2="48" stroke="#666" stroke-width="1"/>
+
+  <!-- Pressure lines -->
+  <line x1="68" y1="66" x2="68" y2="70" stroke="#aaa" stroke-width="0.8"/>
+  <line x1="80" y1="66" x2="80" y2="72" stroke="#aaa" stroke-width="0.8"/>
+  <line x1="92" y1="66" x2="92" y2="70" stroke="#aaa" stroke-width="0.8"/>
+
+  <!-- Input: markdown doc (coming in from left) -->
+  <g transform="rotate(-2 24 76)">
+    <rect x="4" y="60" width="40" height="52" rx="2" fill="#f8f4e8" stroke="#2a1a0a" stroke-width="1.2"/>
+    <text x="12" y="72" font-family="monospace" font-size="5" fill="#999"># Draft</text>
+    <line x1="12" y1="78" x2="36" y2="78" stroke="#ccc" stroke-width="0.8"/>
+    <line x1="12" y1="84" x2="34" y2="84" stroke="#ccc" stroke-width="0.8"/>
+    <line x1="12" y1="90" x2="30" y2="90" stroke="#ccc" stroke-width="0.8"/>
+    <text x="12" y="100" font-family="monospace" font-size="5" fill="#999">**bold**</text>
+  </g>
+
+  <!-- Arrow in -->
+  <path d="M 44 84 L 56 84" stroke="#888" stroke-width="1.5"/>
+  <path d="M 52 80 L 57 84 L 52 88" stroke="#888" stroke-width="1.5" fill="none"/>
+
+  <!-- Output: PDF doc (coming out right, fancier) -->
+  <g transform="rotate(2 134 76)">
+    <rect x="116" y="58" width="40" height="54" rx="2" fill="#f8f4e8" stroke="#2a1a0a" stroke-width="1.5"/>
+    <!-- Formatted content (typeset look) -->
+    <rect x="122" y="64" width="28" height="5" rx="1" fill="#2a1a0a" opacity="0.8"/>
+    <text x="136" y="68" text-anchor="middle" font-family="serif" font-size="5" fill="#f8f4e8">Draft</text>
+    <line x1="122" y1="74" x2="150" y2="74" stroke="#2a1a0a" stroke-width="0.5"/>
+    <line x1="122" y1="80" x2="150" y2="80" stroke="#888" stroke-width="0.8"/>
+    <line x1="122" y1="85" x2="148" y2="85" stroke="#888" stroke-width="0.8"/>
+    <line x1="122" y1="90" x2="146" y2="90" stroke="#888" stroke-width="0.8"/>
+    <text x="122" y="100" font-family="serif" font-size="6" fill="#2a1a0a" font-weight="bold">bold</text>
+    <!-- Page number -->
+    <text x="136" y="108" text-anchor="middle" font-family="serif" font-size="5" fill="#aaa">1</text>
+  </g>
+
+  <!-- Arrow out -->
+  <path d="M 104 84 L 116 84" stroke="#888" stroke-width="1.5"/>
+  <path d="M 112 80 L 117 84 L 112 88" stroke="#888" stroke-width="1.5" fill="none"/>
+
+  <!-- Format labels -->
+  <text x="24" y="120" text-anchor="middle" font-family="monospace" font-size="7" fill="#3498db">.md</text>
+  <text x="136" y="120" text-anchor="middle" font-family="monospace" font-size="7" fill="#c0392b">.pdf</text>
+
+  <!-- Surface -->
+  <line x1="0" y1="130" x2="160" y2="130" stroke="#2a1a0a" stroke-width="1" stroke-dasharray="3,5"/>
+</svg>

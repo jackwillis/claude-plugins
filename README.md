@@ -28,6 +28,8 @@ This plugin adds three skills that enforce one shared discipline: **model the sy
 
 #### Representing and Intervening
 
+![representing-and-intervening](assets/representing-and-intervening.svg)
+
 ```
 /representing-and-intervening
 ```
@@ -40,6 +42,8 @@ State what you think is happening, predict what you should see, then test one th
 
 #### Requisite Variety
 
+![requisite-variety](assets/requisite-variety.svg)
+
 ```
 /requisite-variety
 ```
@@ -51,6 +55,8 @@ When a control system keeps failing despite more rules, more alerts, more checks
 **Sources:** Ashby (1956), Conant & Ashby (1970)
 
 #### Design a Causal Study
+
+![design-causal-study](assets/design-causal-study.svg)
 
 ```
 /design-causal-study
@@ -78,15 +84,6 @@ These skills focus on *when to stop and think* — they don't manage plans, task
 /plugin install superpowers@claude-plugins-official
 ```
 
-#### References
-
-- Hacking, I. (1983). *Representing and Intervening.*
-- Ashby, W.R. (1956). *An Introduction to Cybernetics.*
-- Conant, R.C. & Ashby, W.R. (1970). "Every good regulator of a system must be a model of that system."
-- Schon, D. (1983). *The Reflective Practitioner.*
-- Argyris, C. & Schon, D. (1978). *Organizational Learning.*
-- Pearl, J. & Mackenzie, D. (2018). *The Book of Why.*
-
 ### Text Utils
 
 ![text-utils](assets/text-utils.svg)
@@ -107,6 +104,8 @@ pipx install trafilatura                    # optional: article extraction
 
 #### Fetch Markdown
 
+![fetch-markdown](assets/fetch-markdown.svg)
+
 ```
 /fetch-markdown
 ```
@@ -116,6 +115,8 @@ Get clean markdown from a URL. Tries a markdown proxy, then trafilatura for arti
 **Use when:** fetching web content for analysis, summarization, or reference.
 
 #### Markdown to PDF
+
+![markdown-to-pdf](assets/markdown-to-pdf.svg)
 
 ```
 /markdown-to-pdf
@@ -129,6 +130,8 @@ Render markdown to styled PDF using pandoc + weasyprint + CSS. Ships with three 
 
 #### Read PDF
 
+![read-pdf](assets/read-pdf.svg)
+
 ```
 /read-pdf
 ```
@@ -138,6 +141,15 @@ Extract text from PDFs. Tries `pdftotext` first (fast, digital PDFs), falls back
 **Use when:** "read this PDF", "extract text", scanned documents, image-heavy PDFs.
 
 **Requires:** `poppler` (`pdftotext`), optionally `tesseract` for OCR
+
+## References
+
+- Hacking, I. (1983). *Representing and Intervening.*
+- Ashby, W.R. (1956). *An Introduction to Cybernetics.*
+- Conant, R.C. & Ashby, W.R. (1970). "Every good regulator of a system must be a model of that system."
+- Schon, D. (1983). *The Reflective Practitioner.*
+- Argyris, C. & Schon, D. (1978). *Organizational Learning.*
+- Pearl, J. & Mackenzie, D. (2018). *The Book of Why.*
 
 ## License
 

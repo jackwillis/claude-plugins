@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="140" viewBox="0 0 160 140">
+  <!-- A dial/gauge in the red zone, surrounded by mismatched pegs and holes -->
+
+  <style>
+    .sk { stroke: #2a1a0a; stroke-width: 1.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+
+  <!-- Central gauge/dial -->
+  <circle cx="80" cy="60" r="40" fill="#f8f4e8" stroke="#2a1a0a" stroke-width="2"/>
+  <!-- Gauge face -->
+  <circle cx="80" cy="60" r="36" fill="#f4f0e4" stroke="#ddd" stroke-width="0.5"/>
+
+  <!-- Colored arc zones -->
+  <!-- Green zone (small) -->
+  <path d="M 48 76 A 36 36 0 0 1 56 38" stroke="#2ecc71" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- Yellow zone -->
+  <path d="M 56 38 A 36 36 0 0 1 80 24" stroke="#f39c12" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- Red zone (large — most of the gauge) -->
+  <path d="M 80 24 A 36 36 0 0 1 112 76" stroke="#e74c3c" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+  <!-- Tick marks -->
+  <line x1="48" y1="60" x2="54" y2="60" stroke="#2a1a0a" stroke-width="1"/>
+  <line x1="56" y1="38" x2="60" y2="42" stroke="#2a1a0a" stroke-width="1"/>
+  <line x1="80" y1="24" x2="80" y2="30" stroke="#2a1a0a" stroke-width="1"/>
+  <line x1="104" y1="38" x2="100" y2="42" stroke="#2a1a0a" stroke-width="1"/>
+  <line x1="112" y1="60" x2="106" y2="60" stroke="#2a1a0a" stroke-width="1"/>
+
+  <!-- Labels -->
+  <text x="54" y="68" font-family="monospace" font-size="5" fill="#888">R</text>
+  <text x="104" y="68" font-family="monospace" font-size="5" fill="#888">D</text>
+
+  <!-- Needle (deep in the red) -->
+  <line x1="80" y1="60" x2="106" y2="40" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Needle center cap -->
+  <circle cx="80" cy="60" r="4" fill="#2a1a0a"/>
+  <circle cx="80" cy="60" r="2" fill="#888"/>
+
+  <!-- Label: "VARIETY" on face -->
+  <text x="80" y="80" text-anchor="middle" font-family="monospace" font-size="5" fill="#aaa">VARIETY</text>
+
+  <!-- Mismatched shapes around the gauge (pegs that don't fit) -->
+  <!-- Square peg -->
+  <rect x="14" y="18" width="16" height="16" rx="1" fill="#3498db" stroke="#2a1a0a" stroke-width="1.2"/>
+  <!-- Round hole it should go in -->
+  <circle cx="22" cy="50" r="10" fill="none" stroke="#2a1a0a" stroke-width="1.2" stroke-dasharray="3,3"/>
+
+  <!-- Triangle peg -->
+  <polygon points="138,18 128,38 148,38" fill="#e74c3c" stroke="#2a1a0a" stroke-width="1.2"/>
+  <!-- Star-shaped hole -->
+  <polygon points="138,56 140,50 144,48 142,54 148,56 142,58 144,64 140,60 136,64 138,58 132,56 138,54" fill="none" stroke="#2a1a0a" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Circle peg -->
+  <circle cx="22" cy="108" r="8" fill="#2ecc71" stroke="#2a1a0a" stroke-width="1.2"/>
+  <!-- Hexagon hole -->
+  <polygon points="22,122 30,126 30,134 22,138 14,134 14,126" fill="none" stroke="#2a1a0a" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Arrow showing mismatch -->
+  <path d="M 22 34 L 22 40" stroke="#aaa" stroke-width="1" fill="none"/>
+  <path d="M 19 38 L 22 42 L 25 38" stroke="#aaa" stroke-width="1" fill="none"/>
+
+  <!-- Ground -->
+  <line x1="0" y1="130" x2="160" y2="130" stroke="#2a1a0a" stroke-width="1" stroke-dasharray="3,5"/>
+</svg>

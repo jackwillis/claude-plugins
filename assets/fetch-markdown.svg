@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="140" viewBox="0 0 160 140">
+  <!-- A hook pulling a clean page out of a tangle of messy HTML/web -->
+
+  <style>
+    .sk { stroke: #2a1a0a; stroke-width: 1.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+
+  <!-- Messy web tangle (right side — what you're extracting FROM) -->
+  <!-- Tangled lines representing messy HTML -->
+  <path d="M 88 80 Q 100 60 120 70 Q 140 80 130 100 Q 120 110 140 115" stroke="#ccc" stroke-width="1" fill="none"/>
+  <path d="M 92 90 Q 110 75 130 85 Q 145 95 135 105" stroke="#ddd" stroke-width="0.8" fill="none"/>
+  <path d="M 96 70 Q 115 55 135 65 Q 150 75 140 90" stroke="#ccc" stroke-width="0.8" fill="none"/>
+  <path d="M 100 100 Q 120 90 138 100 Q 150 110 145 120" stroke="#ddd" stroke-width="0.6" fill="none"/>
+
+  <!-- HTML tag fragments in the tangle -->
+  <text x="100" y="68" font-family="monospace" font-size="5" fill="#bbb" transform="rotate(-15 100 68)">&lt;div&gt;</text>
+  <text x="124" y="82" font-family="monospace" font-size="4" fill="#ccc" transform="rotate(8 124 82)">&lt;nav&gt;</text>
+  <text x="118" y="100" font-family="monospace" font-size="4" fill="#bbb" transform="rotate(-5 118 100)">&lt;script&gt;</text>
+  <text x="130" y="114" font-family="monospace" font-size="4" fill="#ccc">&lt;/div&gt;</text>
+  <text x="108" y="112" font-family="monospace" font-size="4" fill="#bbb" transform="rotate(12 108 112)">.css</text>
+
+  <!-- Clean extracted page (left side, being pulled free) -->
+  <rect x="14" y="28" width="56" height="76" rx="2" fill="#f8f4e8" stroke="#2a1a0a" stroke-width="1.5"/>
+
+  <!-- Clean markdown content on extracted page -->
+  <text x="22" y="42" font-family="monospace" font-size="6" fill="#2a1a0a"># Title</text>
+  <line x1="22" y1="50" x2="60" y2="50" stroke="#2a1a0a" stroke-width="0.8"/>
+  <line x1="22" y1="56" x2="58" y2="56" stroke="#888" stroke-width="0.6"/>
+  <line x1="22" y1="62" x2="54" y2="62" stroke="#888" stroke-width="0.6"/>
+  <line x1="22" y1="68" x2="56" y2="68" stroke="#888" stroke-width="0.6"/>
+  <text x="22" y="78" font-family="monospace" font-size="5" fill="#2a1a0a">## Section</text>
+  <line x1="22" y1="84" x2="58" y2="84" stroke="#888" stroke-width="0.6"/>
+  <line x1="22" y1="90" x2="52" y2="90" stroke="#888" stroke-width="0.6"/>
+  <line x1="22" y1="96" x2="56" y2="96" stroke="#888" stroke-width="0.6"/>
+
+  <!-- Fishhook connecting the two -->
+  <path d="M 70 50 Q 82 40 86 50 Q 90 60 84 64 Q 78 66 76 60" stroke="#888" stroke-width="2" fill="none"/>
+  <!-- Line from hook going up -->
+  <line x1="84" y1="46" x2="90" y2="20" stroke="#888" stroke-width="1"/>
+  <line x1="90" y1="20" x2="110" y2="12" stroke="#888" stroke-width="1"/>
+
+  <!-- Motion lines (page being pulled away from tangle) -->
+  <line x1="72" y1="56" x2="80" y2="56" stroke="#aaa" stroke-width="0.8"/>
+  <line x1="74" y1="62" x2="82" y2="62" stroke="#aaa" stroke-width="0.8"/>
+  <line x1="72" y1="68" x2="78" y2="68" stroke="#aaa" stroke-width="0.8"/>
+
+  <!-- Shed HTML falling off the page as it's extracted -->
+  <text x="68" y="84" font-family="monospace" font-size="4" fill="#ccc" transform="rotate(20 68 84)">&lt;/p&gt;</text>
+  <text x="72" y="96" font-family="monospace" font-size="3" fill="#ddd" transform="rotate(35 72 96)">class=</text>
+
+  <!-- Surface -->
+  <line x1="0" y1="130" x2="160" y2="130" stroke="#2a1a0a" stroke-width="1" stroke-dasharray="3,5"/>
+</svg>

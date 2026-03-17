@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="140" viewBox="0 0 160 140">
+  <!-- Causal DAG on paper with colored arrows, one path highlighted, one crossed out -->
+
+  <style>
+    .sk { stroke: #2a1a0a; stroke-width: 1.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+
+  <!-- Paper background (pinned to something) -->
+  <rect x="14" y="10" width="132" height="118" rx="3" fill="#f8f4e8" stroke="#2a1a0a" stroke-width="1.2"/>
+  <!-- Paper curl bottom-right -->
+  <path d="M 146 108 Q 148 118 140 128" fill="#e8e0d4" stroke="#2a1a0a" stroke-width="0.8"/>
+  <!-- Pin -->
+  <circle cx="80" cy="14" r="4" fill="#e74c3c" stroke="#2a1a0a" stroke-width="1"/>
+  <circle cx="80" cy="14" r="1.5" fill="#c0392b"/>
+
+  <!-- Grid dots (graph paper feel) -->
+  <g fill="#ddd" opacity="0.5">
+    <circle cx="30" cy="30" r="0.8"/><circle cx="50" cy="30" r="0.8"/><circle cx="70" cy="30" r="0.8"/>
+    <circle cx="90" cy="30" r="0.8"/><circle cx="110" cy="30" r="0.8"/><circle cx="130" cy="30" r="0.8"/>
+    <circle cx="30" cy="50" r="0.8"/><circle cx="50" cy="50" r="0.8"/><circle cx="70" cy="50" r="0.8"/>
+    <circle cx="90" cy="50" r="0.8"/><circle cx="110" cy="50" r="0.8"/><circle cx="130" cy="50" r="0.8"/>
+    <circle cx="30" cy="70" r="0.8"/><circle cx="50" cy="70" r="0.8"/><circle cx="70" cy="70" r="0.8"/>
+    <circle cx="90" cy="70" r="0.8"/><circle cx="110" cy="70" r="0.8"/><circle cx="130" cy="70" r="0.8"/>
+    <circle cx="30" cy="90" r="0.8"/><circle cx="50" cy="90" r="0.8"/><circle cx="70" cy="90" r="0.8"/>
+    <circle cx="90" cy="90" r="0.8"/><circle cx="110" cy="90" r="0.8"/><circle cx="130" cy="90" r="0.8"/>
+  </g>
+
+  <!-- DAG nodes -->
+  <!-- X (treatment) -->
+  <circle cx="40" cy="44" r="14" fill="#3498db" opacity="0.15" stroke="#3498db" stroke-width="1.5"/>
+  <text x="40" y="48" text-anchor="middle" font-family="serif" font-size="14" fill="#2a1a0a" font-style="italic">X</text>
+
+  <!-- Y (outcome) -->
+  <circle cx="120" cy="44" r="14" fill="#2ecc71" opacity="0.15" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="120" y="48" text-anchor="middle" font-family="serif" font-size="14" fill="#2a1a0a" font-style="italic">Y</text>
+
+  <!-- Z (confounder) -->
+  <circle cx="80" cy="86" r="14" fill="#f39c12" opacity="0.15" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="80" y="90" text-anchor="middle" font-family="serif" font-size="14" fill="#2a1a0a" font-style="italic">Z</text>
+
+  <!-- W (collider — crossed out) -->
+  <circle cx="80" cy="44" r="10" fill="#eee" stroke="#ccc" stroke-width="1"/>
+  <text x="80" y="48" text-anchor="middle" font-family="serif" font-size="11" fill="#bbb" font-style="italic">W</text>
+  <!-- X through W -->
+  <line x1="72" y1="36" x2="88" y2="52" stroke="#c0392b" stroke-width="2"/>
+  <line x1="88" y1="36" x2="72" y2="52" stroke="#c0392b" stroke-width="2"/>
+
+  <!-- Arrows -->
+  <!-- X → Y (highlighted, the causal path we care about) -->
+  <line x1="54" y1="44" x2="104" y2="44" stroke="#2ecc71" stroke-width="2.5"/>
+  <path d="M 100 40 L 105 44 L 100 48" stroke="#2ecc71" stroke-width="2.5" fill="none"/>
+
+  <!-- X → Z -->
+  <line x1="48" y1="56" x2="68" y2="78" stroke="#2a1a0a" stroke-width="1.2"/>
+  <path d="M 65 74 L 69 79 L 63 78" fill="#2a1a0a"/>
+
+  <!-- Z → Y -->
+  <line x1="92" y1="78" x2="112" y2="56" stroke="#2a1a0a" stroke-width="1.2"/>
+  <path d="M 110 60 L 113 55 L 114 61" fill="#2a1a0a"/>
+
+  <!-- Question mark on Z→Y path -->
+  <text x="106" y="74" font-family="serif" font-size="16" fill="#c0392b" font-weight="bold">?</text>
+
+  <!-- Handwritten labels -->
+  <text x="30" y="110" font-family="serif" font-size="7" fill="#888" font-style="italic">estimand:</text>
+  <text x="30" y="120" font-family="serif" font-size="7" fill="#888" font-style="italic">E[Y | do(X)]</text>
+
+  <!-- Pencil -->
+  <line x1="130" y1="120" x2="142" y2="98" stroke="#f4c542" stroke-width="3" stroke-linecap="round"/>
+  <line x1="142" y1="98" x2="143" y2="96" stroke="#2a1a0a" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

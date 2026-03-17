@@ -1,18 +1,69 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="480" height="56" viewBox="0 0 480 56">
-  <defs>
-    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#2c3e50"/>
-      <stop offset="100%" style="stop-color:#34495e"/>
-    </linearGradient>
-  </defs>
-  <rect width="480" height="56" rx="8" fill="url(#bg1)"/>
-  <text x="52" y="24" font-family="-apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="bold" fill="#ecf0f1">systems-analysis</text>
-  <text x="52" y="42" font-family="-apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#bdc3c7">Model the system before intervening</text>
-  <g transform="translate(16, 14)" fill="none" stroke="#ecf0f1" stroke-width="1.5" stroke-linecap="round">
-    <circle cx="8" cy="14" r="4"/>
-    <circle cx="22" cy="6" r="3"/>
-    <circle cx="22" cy="22" r="3"/>
-    <line x1="12" y1="12" x2="19" y2="7"/>
-    <line x1="12" y1="16" x2="19" y2="21"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="140" viewBox="0 0 160 140">
+  <!-- Chalkboard with Ashby's regulation diagram, chalk and eraser -->
+
+  <style>
+    .chalk { stroke: #ddd; stroke-width: 1.4; fill: none; stroke-linecap: round; }
+    .frame { stroke: #5a3a1a; stroke-width: 3; fill: none; stroke-linejoin: round; }
+  </style>
+
+  <!-- Chalkboard -->
+  <rect x="16" y="10" width="128" height="86" rx="2" fill="#2c4a3a" stroke="#2a1a0a" stroke-width="1.5"/>
+  <!-- Wooden frame -->
+  <rect x="12" y="6" width="136" height="94" rx="4" class="frame"/>
+
+  <!-- Chalk tray -->
+  <rect x="20" y="98" width="120" height="6" rx="1" fill="#5a3a1a" stroke="#2a1a0a" stroke-width="1"/>
+
+  <!-- Diagram: D → T → E with R feeding back -->
+  <!-- D box -->
+  <rect x="28" y="36" width="22" height="16" class="chalk" rx="1"/>
+  <text x="39" y="48" text-anchor="middle" font-family="serif" font-size="12" fill="#eee" font-style="italic">D</text>
+
+  <!-- Arrow D→T -->
+  <line x1="50" y1="44" x2="62" y2="44" class="chalk"/>
+  <path d="M 59 41 L 63 44 L 59 47" class="chalk"/>
+
+  <!-- T box -->
+  <rect x="64" y="36" width="22" height="16" class="chalk" rx="1"/>
+  <text x="75" y="48" text-anchor="middle" font-family="serif" font-size="12" fill="#eee" font-style="italic">T</text>
+
+  <!-- Arrow T→E -->
+  <line x1="86" y1="44" x2="98" y2="44" class="chalk"/>
+  <path d="M 95 41 L 99 44 L 95 47" class="chalk"/>
+
+  <!-- E box -->
+  <rect x="100" y="36" width="22" height="16" class="chalk" rx="1"/>
+  <text x="111" y="48" text-anchor="middle" font-family="serif" font-size="12" fill="#eee" font-style="italic">E</text>
+
+  <!-- R box (below T, feedback) -->
+  <rect x="64" y="62" width="22" height="16" rx="6" class="chalk"/>
+  <text x="75" y="74" text-anchor="middle" font-family="serif" font-size="12" fill="#eee" font-style="italic">R</text>
+
+  <!-- Arrow R→T (up) -->
+  <line x1="75" y1="62" x2="75" y2="54" class="chalk"/>
+  <path d="M 72 57 L 75 53 L 78 57" class="chalk"/>
+
+  <!-- η label near E -->
+  <text x="126" y="48" font-family="serif" font-size="10" fill="#aaa" font-style="italic">η</text>
+
+  <!-- Chalk dust -->
+  <circle cx="40" cy="24" r="1" fill="#9a9" opacity="0.3"/>
+  <circle cx="100" cy="22" r="0.7" fill="#9a9" opacity="0.25"/>
+  <circle cx="72" cy="28" r="0.8" fill="#9a9" opacity="0.2"/>
+
+  <!-- Chalk piece on tray -->
+  <rect x="36" y="99" width="14" height="4" rx="2" fill="#ddd" stroke="#bbb" stroke-width="0.6"/>
+  <!-- Eraser on tray -->
+  <rect x="100" y="98" width="20" height="6" rx="1" fill="#8b6b4b" stroke="#2a1a0a" stroke-width="0.8"/>
+  <rect x="100" y="98" width="20" height="3" rx="1" fill="#aaa"/>
+
+  <!-- Chalk dust on tray -->
+  <circle cx="60" cy="101" r="1.5" fill="#ddd" opacity="0.3"/>
+  <circle cx="80" cy="100" r="1" fill="#ddd" opacity="0.2"/>
+
+  <!-- Board ledge shadow -->
+  <line x1="20" y1="104" x2="140" y2="104" stroke="#2a1a0a" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Ground -->
+  <line x1="0" y1="130" x2="160" y2="130" stroke="#2a1a0a" stroke-width="1" stroke-dasharray="3,5"/>
 </svg>

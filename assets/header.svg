@@ -1,36 +1,82 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="160" viewBox="0 0 200 160">
-  <!-- Angular red panda-boltund with tulips -->
+  <!-- Angular red panda-boltund sitting among prairie flowers -->
 
-  <!-- Tulip 1 (left) -->
-  <line x1="24" y1="100" x2="24" y2="155" stroke="#2ecc71" stroke-width="3" stroke-linecap="round"/>
-  <path d="M 16 100 Q 14 82 24 74 Q 34 82 32 100 Z" fill="#e74c3c"/>
-  <path d="M 20 100 Q 22 86 24 78 Q 26 86 28 100 Z" fill="#c0392b"/>
-  <ellipse cx="14" cy="130" rx="10" ry="4" fill="#27ae60" transform="rotate(-30 14 130)"/>
-  <ellipse cx="34" cy="120" rx="10" ry="4" fill="#27ae60" transform="rotate(25 34 120)"/>
+  <!-- Ground (prairie grass) -->
+  <path d="M 0 148 Q 5 140 10 148 Q 15 138 20 148 Q 25 140 30 148 Q 35 136 40 148 Q 45 140 50 148 Q 55 138 60 148 Q 65 140 70 148 Q 75 136 80 148 Q 85 140 90 148 Q 95 138 100 148 Q 105 140 110 148 Q 115 136 120 148 Q 125 140 130 148 Q 135 138 140 148 Q 145 140 150 148 Q 155 136 160 148 Q 165 140 170 148 Q 175 138 180 148 Q 185 140 190 148 Q 195 138 200 148" fill="#6a9a4a" opacity="0.3"/>
+  <line x1="0" y1="150" x2="200" y2="150" stroke="#2a1a0a" stroke-width="1" opacity="0.3"/>
+  <!-- Grass blades -->
+  <path d="M 4 150 Q 2 136 6 128" stroke="#5a8a3a" stroke-width="1.2" fill="none" opacity="0.4"/>
+  <path d="M 8 150 Q 10 138 8 130" stroke="#5a8a3a" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M 44 150 Q 42 134 46 126" stroke="#5a8a3a" stroke-width="1.2" fill="none" opacity="0.4"/>
+  <path d="M 48 150 Q 50 136 48 128" stroke="#5a8a3a" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M 148 150 Q 146 134 150 124" stroke="#5a8a3a" stroke-width="1.2" fill="none" opacity="0.4"/>
+  <path d="M 152 150 Q 154 138 152 130" stroke="#5a8a3a" stroke-width="1" fill="none" opacity="0.3"/>
 
-  <!-- Tulip 2 (far left, shorter) -->
-  <line x1="10" y1="115" x2="10" y2="155" stroke="#2ecc71" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 4 115 Q 2 100 10 94 Q 18 100 16 115 Z" fill="#f39c12"/>
-  <path d="M 7 115 Q 9 104 10 97 Q 11 104 13 115 Z" fill="#e67e22"/>
+  <!-- Coneflower / Echinacea 1 (left, tall) -->
+  <path d="M 24 96 Q 22 120 24 150" stroke="#5a8a3a" stroke-width="1.5" fill="none"/>
+  <path d="M 24 84 Q 16 90 14 98" stroke="#d45cb0" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 24 84 Q 18 88 20 96" stroke="#c04a9a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 24 84 Q 30 90 34 98" stroke="#d45cb0" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 24 84 Q 28 88 28 96" stroke="#c04a9a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 24 84 Q 22 92 22 98" stroke="#d45cb0" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="24" cy="82" rx="5" ry="4" fill="#8b5e3c" stroke="#2a1a0a" stroke-width="0.8"/>
+  <ellipse cx="24" cy="81" rx="3" ry="2" fill="#a07040" opacity="0.5"/>
+  <path d="M 22 120 Q 12 114 8 118" stroke="#5a8a3a" stroke-width="1.2" fill="none"/>
 
-  <!-- Tulip 3 (right) -->
-  <line x1="176" y1="105" x2="176" y2="155" stroke="#2ecc71" stroke-width="3" stroke-linecap="round"/>
-  <path d="M 168 105 Q 166 87 176 79 Q 186 87 184 105 Z" fill="#9b59b6"/>
-  <path d="M 172 105 Q 174 91 176 83 Q 178 91 180 105 Z" fill="#8e44ad"/>
-  <ellipse cx="166" cy="135" rx="10" ry="4" fill="#27ae60" transform="rotate(-20 166 135)"/>
-  <ellipse cx="186" cy="125" rx="10" ry="4" fill="#27ae60" transform="rotate(30 186 125)"/>
+  <!-- Black-eyed Susan 1 (far left, shorter) -->
+  <path d="M 10 108 Q 8 126 10 150" stroke="#5a8a3a" stroke-width="1.2" fill="none"/>
+  <path d="M 10 104 L 4 96" stroke="#f4c542" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 10 104 L 16 96" stroke="#f4c542" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 10 104 L 2 102" stroke="#f4c542" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 10 104 L 18 102" stroke="#f4c542" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 10 104 L 6 98" stroke="#e8b420" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 10 104 L 14 98" stroke="#e8b420" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <circle cx="10" cy="104" r="3" fill="#3a2010" stroke="#2a1a0a" stroke-width="0.6"/>
 
-  <!-- Tulip 4 (far right, shorter) -->
-  <line x1="190" y1="118" x2="190" y2="155" stroke="#2ecc71" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M 184 118 Q 182 105 190 99 Q 198 105 196 118 Z" fill="#e74c3c"/>
-  <path d="M 187 118 Q 189 108 190 102 Q 191 108 193 118 Z" fill="#c0392b"/>
+  <!-- Wild bergamot (right, tall, lavender pom-pom) -->
+  <path d="M 176 100 Q 174 124 176 150" stroke="#5a8a3a" stroke-width="1.5" fill="none"/>
+  <circle cx="176" cy="90" r="10" fill="#b08cc8" opacity="0.3"/>
+  <path d="M 176 82 Q 174 78 176 76" stroke="#9b6bb5" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <path d="M 172 84 Q 168 82 166 80" stroke="#9b6bb5" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <path d="M 180 84 Q 184 82 186 80" stroke="#9b6bb5" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <path d="M 170 88 Q 166 86 164 86" stroke="#a878c0" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <path d="M 182 88 Q 186 86 188 86" stroke="#a878c0" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <path d="M 174 92 Q 170 94 168 92" stroke="#a878c0" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <path d="M 178 92 Q 182 94 184 92" stroke="#a878c0" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <path d="M 176 96 Q 176 100 174 98" stroke="#9b6bb5" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <path d="M 174 118 Q 162 112 158 116" stroke="#5a8a3a" stroke-width="1.2" fill="none"/>
+  <path d="M 178 118 Q 188 112 192 116" stroke="#5a8a3a" stroke-width="1.2" fill="none"/>
 
-  <!-- Tulip 5 (center-left, behind creature) -->
-  <line x1="56" y1="108" x2="56" y2="155" stroke="#2ecc71" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 50 108 Q 49 96 56 90 Q 63 96 62 108 Z" fill="#f1c40f"/>
-  <path d="M 53 108 Q 55 99 56 93 Q 57 99 59 108 Z" fill="#f39c12"/>
+  <!-- Goldenrod (far right, arching spray) -->
+  <path d="M 192 110 Q 190 130 192 150" stroke="#5a8a3a" stroke-width="1.2" fill="none"/>
+  <path d="M 192 108 Q 194 100 198 96" stroke="#5a8a3a" stroke-width="1" fill="none"/>
+  <circle cx="198" cy="96" r="1.5" fill="#f4c542"/>
+  <circle cx="196" cy="100" r="1.5" fill="#f4c542"/>
+  <circle cx="194" cy="104" r="1.2" fill="#f4c542"/>
+  <circle cx="192" cy="108" r="1.2" fill="#e8b420"/>
+  <path d="M 192 106 Q 188 98 186 94" stroke="#5a8a3a" stroke-width="1" fill="none"/>
+  <circle cx="186" cy="94" r="1.5" fill="#f4c542"/>
+  <circle cx="188" cy="98" r="1.2" fill="#f4c542"/>
 
-  <!-- Creature: angular red panda-boltund sitting among tulips -->
+  <!-- Coneflower 2 (center-left, behind creature, shorter) -->
+  <path d="M 56 106 Q 54 128 56 150" stroke="#5a8a3a" stroke-width="1.2" fill="none"/>
+  <path d="M 56 96 Q 50 100 48 106" stroke="#d45cb0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M 56 96 Q 52 100 54 106" stroke="#c04a9a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M 56 96 Q 62 100 64 106" stroke="#d45cb0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M 56 96 Q 60 100 58 106" stroke="#c04a9a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="56" cy="94" rx="4" ry="3" fill="#8b5e3c" stroke="#2a1a0a" stroke-width="0.6"/>
+
+  <!-- Black-eyed Susan 2 (right of bergamot, short) -->
+  <path d="M 160 118 Q 158 134 160 150" stroke="#5a8a3a" stroke-width="1" fill="none"/>
+  <path d="M 160 114 L 154 108" stroke="#f4c542" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 160 114 L 166 108" stroke="#f4c542" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 160 114 L 154 114" stroke="#f4c542" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 160 114 L 166 114" stroke="#f4c542" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 160 114 L 156 110" stroke="#e8b420" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M 160 114 L 164 110" stroke="#e8b420" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <circle cx="160" cy="114" r="2.5" fill="#3a2010" stroke="#2a1a0a" stroke-width="0.5"/>
+
+  <!-- === Angular red panda-boltund === -->
 
   <!-- Tail (behind body) -->
   <path d="M 138 108 L 154 96 L 164 100 L 162 118 L 152 126 L 142 120 Z" fill="#c0392b"/>
@@ -84,9 +130,4 @@
   <ellipse cx="118" cy="140" rx="10" ry="6" fill="#c0392b"/>
   <ellipse cx="82" cy="140" rx="6" ry="4" fill="#f0d0a0"/>
   <ellipse cx="118" cy="140" rx="6" ry="4" fill="#f0d0a0"/>
-
-  <!-- Small tulip held in right paw -->
-  <line x1="124" y1="128" x2="128" y2="110" stroke="#2ecc71" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 123 110 Q 122 100 128 96 Q 134 100 133 110 Z" fill="#e84393"/>
-  <path d="M 125 110 Q 127 103 128 98 Q 129 103 131 110 Z" fill="#d63384"/>
 </svg>
