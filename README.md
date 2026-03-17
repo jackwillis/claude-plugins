@@ -26,7 +26,7 @@ Reboot Claude after installing plugins to load new skills.
 
 AI coding agents are biased toward action. They'll try a fix before understanding why something broke, add more rules when the problem is that rules can't keep up, or draw causal conclusions from correlations. These are the same mistakes humans make, just faster.
 
-This plugin adds three skills that enforce one shared discipline: **model the system before intervening.** Skills activate automatically when Claude detects a matching situation, and can also be invoked directly.
+This plugin adds four skills that enforce one shared discipline: **model the system before intervening.** Skills activate automatically when Claude detects a matching situation, and can also be invoked directly.
 
 #### Representing and Intervening
 
@@ -63,6 +63,16 @@ When a control system keeps failing despite more rules, more alerts, more checks
 Before claiming X causes Y, define exactly what you're measuring, draw the causal structure, and check whether the data can actually answer the question. Seven steps that prevent the most common errors: adjusting for variables on the causal path, conditioning on colliders, and skipping the estimand entirely.
 
 **Use when:** "does X cause Y", "should we change X to improve Y", drawing conclusions from observational data. Based on Pearl & Mackenzie (2018).
+
+#### The Frame Problem
+
+```
+/frame-problem
+```
+
+Every action and every line of reasoning assumes a frame — things you take to stay the same. This skill forces you to make those assumptions explicit so they can be checked. Name what you're holding constant, check whether it's still true, question whether you're solving the right problem, and admit what your current vocabulary can't see. Recognizes three failure modes from Dennett's robot thought experiment: ignoring side effects (R1), considering everything (R1D1), and meta-paralysis over relevance (R2D1).
+
+**Use when:** stale state, inherited problem framing, confidence without re-verification, any gap between when information was gathered and when it's being used. Based on Fodor (1987), Dennett (1984), Hayes (1973).
 
 #### Transitions
 
