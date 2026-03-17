@@ -11,7 +11,7 @@ Add the marketplace in Claude Code:
 Then install individual plugins:
 
 ```
-/plugin install jackwillis@systems-analysis
+/plugin install systems-analysis@jackwillis
 ```
 
 ---
