@@ -12,17 +12,11 @@ Model the system before intervening. All three skills enforce this in different 
 | **requisite-variety** | Regulation and control | Name D/R/T/E/η. Check variety, then model, then constraints. |
 | **design-causal-study** | Causal claims | Define estimand → Draw DAG → Check identifiability. No study without structure. |
 
-## Install
-
-```
-claude plugin add jackwillis/systems-analysis
-```
-
 ## Skills
 
 ### representing-and-intervening
 
-Epistemic discipline for debugging. Based on Ian Hacking's *Representing and Intervening*: you must model a system before predicting its behavior, and predict before intervening. Humans state their model before tools formalize it (informed by Bainbridge, 1983). Includes a structure-vs-parameter update decision.
+Epistemic discipline for debugging. Based on Ian Hacking's *Representing and Intervening*: you must model a system before predicting its behavior, and predict before intervening. Check whether you're solving the right problem before solving it (Schon). Update decisions distinguish single-loop from double-loop learning (Argyris).
 
 Triggers on: "why is this happening", "help me debug", unexplained gaps between expected and observed behavior.
 
@@ -54,9 +48,10 @@ Each skill includes transition signals — conditions under which the current sk
 - Hacking, I. (1983). *Representing and Intervening.*
 - Ashby, W.R. (1956). *An Introduction to Cybernetics.*
 - Conant, R.C. & Ashby, W.R. (1970). "Every good regulator of a system must be a model of that system."
-- Bainbridge, L. (1983). "Ironies of Automation." *Automatica*, 19(6).
+- Schon, D. (1983). *The Reflective Practitioner.*
+- Argyris, C. & Schon, D. (1978). *Organizational Learning.*
 - Pearl, J. (2009). *Causality: Models, Reasoning, and Inference.*
 
 ## License
 
-MIT
+[MIT](LICENSE)

@@ -12,8 +12,8 @@ You must model a system before predicting its behavior, and predict before inter
 | Phase | Action | Gate |
 |-------|--------|------|
 | **Represent** | State the model: components, relationships, assumptions | — |
-| **Predict** | What should we observe? Write it down. | No intervention without written prediction |
-| **Intervene** | One change. Compare result to prediction. | One variable at a time |
+| **Predict** | What should we observe? Write it down. | No intervention without prediction |
+| **Intervene** | List available tests for the prediction, pick one, compare result. | One variable at a time |
 | **Observe** | Record actual vs. predicted | — |
 | **Update** | Prediction wrong? → See Update Decision | — |
 
@@ -24,9 +24,9 @@ You must model a system before predicting its behavior, and predict before inter
 - **Lightweight (default):** Natural language model and predictions. Always start here.
 - **Formal (opt-in):** Tool-assisted. Only after lightweight model exists.
 
-## Bainbridge Rule
+## Problem Setting (Schon)
 
-Human states model BEFORE tools formalize it. Tools check reasoning — they don't replace it.
+Before acting on a diagnosis, are you solving the right problem, or the wrong problem correctly? Trace the assumption chain to its deepest dependency. Present the human with one pointed question — not the whole chain.
 
 ## Update Decision
 
@@ -40,7 +40,7 @@ digraph update {
 }
 ```
 
-Ashby's Law: if the model can't represent the system's variety, no parameter adjustment will fix it.
+Single-loop: tune parameters. Double-loop: revise model (Argyris). Ashby: if the model lacks variety, no tuning helps.
 
 ## Red Flags
 
@@ -58,14 +58,12 @@ Stop and return to Represent if you catch yourself:
 | "Trying IS learning" | Predict first. Without prediction, results are noise. |
 | "The tool will figure it out" | No model in → no insight out. |
 | "Close enough" | Wrong in a way you haven't identified yet. |
-| "The model is implicit" | Implicit models can't be checked or updated. Write it down. |
-| "Predicting is overhead" | 30 seconds to predict vs. hours of undirected intervention. |
+| "The model is implicit" | Implicit models can't be checked. Write it down. |
+| "Predicting is overhead" | 30 seconds to predict vs. hours undirected. |
 | "Let me give you a checklist" | Checklist = intervention without representation. Model first. |
 
 ## Transition Signals
 
-- **Model reveals a regulation problem** (regulator can't match disturbance variety, "we keep adding rules") → switch to **requisite-variety**.
+- **Model reveals a regulation problem** ("we keep adding rules") → switch to **requisite-variety**.
 - **Represent phase needs causal structure from observational data** → switch to **design-causal-study**.
 - **Production is down, what broke?** → use **systematic-debugging** (forensic, not epistemic).
-
-R&I is epistemic: *how does this work, and what will happen if I change it?*
