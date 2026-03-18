@@ -1,6 +1,6 @@
 {
   "name": "systems-analysis",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Frameworks for modeling systems before intervening: epistemic discipline (Hacking), regulatory analysis (Ashby), causal identification (Pearl), and frame-assumption auditing (Fodor/Dennett).",
   "author": {
     "name": "Jack Willis",

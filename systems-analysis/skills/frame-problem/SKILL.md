@@ -14,7 +14,7 @@ Apply in order when you suspect your frame may be wrong:
 | Action | Question | What to do |
 |--------|----------|------------|
 | **Name the Frame** | What am I assuming stays the same? | State it. "I'm assuming the codebase is the same as when I last read it." "I'm assuming the user's goal is X." If you can't name the assumption, you can't check it. |
-| **Check Freshness** | When was this information gathered, and what has happened since? | Turns passed since last read? User mentioned doing something? Your own prior actions had side effects? CI or deployments may have run? |
+| **Check Freshness** | When was this information gathered, and what has happened since? | Check mtimes (`ls -l`) on files you're about to modify — if newer than your last read, re-read them. Turns passed since last read? User mentioned doing something? Your own prior actions had side effects? CI or deployments may have run? |
 | **Check Scope** | Am I solving the right problem? | The frame includes the problem definition itself. If the user says "it's a caching issue," that's a frame. The most consequential assumption is often which problem you're solving, not how. |
 | **Name the Blind Spots** | What kind of change would my current vocabulary not let me notice? | Your ontology determines what changes are visible to you. This is the hardest action — an admission of bounded rationality, stated out loud. |
 
