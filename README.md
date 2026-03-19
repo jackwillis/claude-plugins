@@ -2,7 +2,7 @@
 
 ![Claude Code Plugins](assets/header.svg)
 
-Plugins for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropic's coding CLI) that make Claude stop and think before acting. Each plugin adds skills that trigger automatically when Claude detects a matching situation, or can be invoked directly with slash commands. Two plugins: one for disciplined thinking, one for getting text in and out of formats.
+Plugins for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that make Claude stop and think before acting. Each plugin adds skills that trigger automatically when Claude detects a matching situation, or can be invoked directly with slash commands. Two plugins: one for disciplined thinking, one for getting text in and out of formats.
 
 | Skill | What it does | Trigger |
 |-------|-------------|---------|
