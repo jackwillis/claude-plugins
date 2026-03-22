@@ -82,7 +82,7 @@ Stop and return to Represent if you catch yourself:
 ## Transition Signals
 
 - **Model reveals a regulation problem** (regulator can't match disturbance variety, "we keep adding rules") → switch to **requisite-variety**.
-- **Represent phase needs causal structure from observational data** (confounders, selection bias) → switch to **design-causal-study**.
+- **Represent phase needs causal structure from observational data** (confounders, selection bias) → switch to **causal-analysis**.
 - **Production is down, what broke?** → use **systematic-debugging** (forensic, not epistemic).
 - **Update reveals structural revision** — the model was wrong, not miscalibrated. If **brainstorming** is available, use it to explore the problem space before committing to a new model.
 - **Assumptions feel stale or unexamined** — you have a model but haven't checked whether the world still matches it → switch to **frame-problem**.

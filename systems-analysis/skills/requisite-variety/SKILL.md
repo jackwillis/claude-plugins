@@ -71,11 +71,11 @@ A team has 200+ custom WAF rules but keeps getting breached. The SOC wants more 
 ## Transition Signals
 
 - **Can't name D/R/T/E/η** — you don't have a model yet → start with **representing-and-intervening**.
-- **Need to establish a causal link from observational data** before designing the regulator → use **design-causal-study**.
+- **Need to establish a causal link from observational data** before designing the regulator → use **causal-analysis**.
 - **Variety is sufficient but system is still failing** — the problem may be epistemic (wrong model), not regulatory → return to **representing-and-intervening**.
 - **Analysis complete, regulator needs redesign** — the three principles told you what's wrong. If **brainstorming** is available, use it to explore redesign options. If **writing-plans** is available, use it to structure the work. For independent workstreams, **subagent-driven-development** can parallelize.
 
 ## Related Skills
 
 - **representing-and-intervening**: R&I's Represent phase is where the Good Regulator's model gets built.
-- **design-causal-study**: Pearl's framework for what can be regulated from observational data.
+- **causal-analysis**: Pearl's framework for what can be regulated from observational data.

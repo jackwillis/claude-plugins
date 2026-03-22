@@ -2,7 +2,7 @@
 
 body {
   /* Serif stack: macOS → iOS → Windows → Linux → Android → generic */
-  font-family: Charter, "Iowan Old Style", "Palatino Linotype",
+  font-family: "Charis SIL", Charter, "Iowan Old Style", "Palatino Linotype",
                "URW Palladio L", "Droid Serif", Palatino, Georgia, serif;
   max-width: 36em; /* ~75 chars at serif proportions */
   margin: 2em auto;
@@ -10,6 +10,7 @@ body {
   line-height: 1.55;
   color: #1a1a1a;
   font-size: 12pt;
+  text-align: left;
 }
 
 /* Sans stack: cross-platform free → Windows → macOS/iOS → Android → Linux → generic */
@@ -56,6 +57,7 @@ th {
   font-size: 0.95em;
 }
 
+strong { word-spacing: -0.02em; }
 a { color: #1a5276; }
 
 @page {

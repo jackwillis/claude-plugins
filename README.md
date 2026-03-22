@@ -10,7 +10,7 @@
 |-------|-------------|---------|
 | `/representing-and-intervening` | Write down your model before debugging | "why is this happening", unexplained behavior |
 | `/requisite-variety` | Check if your defenses can actually keep up with what they're defending against | regulation failure, alert fatigue |
-| `/design-causal-study` | Verify the data supports a cause-and-effect claim | "does X cause Y", observational data |
+| `/causal-analysis` | Verify the data supports a cause-and-effect claim | "does X cause Y", observational data |
 | `/frame-problem` | Surface assumptions that may have gone stale | stale state, inherited framing |
 | `/fetch-markdown` | Get clean markdown from a URL | fetching web content for analysis |
 | `/markdown-to-pdf` | Render markdown to styled PDF | "make a PDF", "export as PDF" |
@@ -54,11 +54,11 @@ Stop adding more rules when rules can't keep up. This skill checks whether your 
 
 **Use when:** "why can't we control this", alert fatigue, playing whack-a-mole with problems that keep adapting. Based on Ashby (1956), Conant & Ashby (1970).
 
-#### Design a Causal Study
+#### Causal Analysis
 
-Stop assuming that correlation means causation. Seven steps that make you define what you're measuring, map out what causes what, and check whether the data can actually answer the question — before you adjust for the wrong variables or control for the wrong thing.
+Stop assuming that correlation means causation. Whether you're designing a study or auditing someone else's causal reasoning, this skill makes you place claims on Pearl's causal ladder, draw the causal structure, and check whether the data can actually answer the question.
 
-<img src="assets/design-causal-study.svg" width="120">
+<img src="assets/causal-analysis.svg" width="120">
 
 **Use when:** "does X cause Y", "should we change X to improve Y", drawing conclusions from observational data. Based on Pearl & Mackenzie (2018).
 

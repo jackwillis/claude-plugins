@@ -1,25 +1,30 @@
 ---
-name: design-causal-study
-description: Use when evaluating whether a dataset or finding supports a causal claim, designing an observational study or experiment, or asked to analyze why something happens (not just whether it correlates). Triggers on "does X cause Y", "should we change X to improve Y", "we noticed X and Y move together", "the data shows...", "our A/B test found...", drawing conclusions from observational data, confounders, selection bias.
+name: causal-analysis
+description: Use when evaluating whether evidence supports a causal claim or designing a study to test one. Triggers on "does X cause Y", "should we change X to improve Y", "we noticed X and Y move together", "the data shows...", "our A/B test found...", auditing causal reasoning in a document or analysis, drawing conclusions from observational data, confounders, selection bias.
 ---
 
-# Design a Causal Study
+# Causal Analysis
 
 ## Overview
 
-Correlation does not establish cause. Before recommending an intervention or designing a study, you must establish: (1) what causal quantity you're estimating, (2) what the causal structure is, and (3) whether the quantity is identifiable from available data.
+Correlation does not establish cause. Whether you're designing a study or auditing someone else's causal reasoning, you need: (1) where the claim sits on Pearl's ladder, (2) what the causal structure is, and (3) whether the quantity is identifiable from available data.
 
 Follow the steps in order. Do not skip to study design before completing the DAG and identifiability check.
 
-## Step 0: Gather Context
+## Evaluating Existing Claims
 
-Before defining anything, generate what you know about this system. What's been tried? What constraints exist? What data is available? What domain knowledge is relevant? State what you're confident about and what you're uncertain about — uncertainty tells you where the DAG edges are weakest and where sensitivity analysis matters most.
+If you're auditing causal reasoning rather than designing a study, start here:
 
-If you're entering from **representing-and-intervening**, the Represent phase already covers this. Otherwise, do it now.
+1. **What rung?** Place each claim on Pearl's Ladder (Step 1). Most claims from observational data are Rung 1 dressed up as Rung 2.
+2. **What's the implicit estimand?** The author may never state it. Write it for them.
+3. **What confounds aren't acknowledged?** Draw the DAG (Step 4). Look for backdoor paths the author didn't close.
+4. **What's the strongest claim the evidence actually supports?** Often weaker than what's stated.
 
-## Pearl's Causal Ladder
+Then use the full pipeline below for any claim that needs deeper analysis.
 
-Before anything else, locate the question on the ladder:
+## Step 1: Pearl's Causal Ladder
+
+Locate the question on the ladder first — this determines what kind of evidence can even address it:
 
 | Rung | Question type | Example |
 |------|--------------|---------|
@@ -31,7 +36,15 @@ Observational data lives on Rung 1. Causal claims require Rung 2 or 3. Identify 
 
 ---
 
-## Step 1: Define the Estimand
+## Step 2: Gather Context
+
+Before defining anything, build a model of the system. What's been tried? What constraints exist? What data is available? State what you're confident about and what you're uncertain about — uncertainty tells you where the DAG edges are weakest.
+
+If entering from **representing-and-intervening**, the Represent phase already covers this — use that model directly.
+
+---
+
+## Step 3: Define the Estimand
 
 State precisely what you want to measure before touching data.
 
@@ -46,7 +59,7 @@ If you cannot write this sentence, stop. The question is not yet well-formed.
 
 ---
 
-## Step 2: Draw the DAG
+## Step 4: Draw the DAG
 
 Draw a directed acyclic graph (DAG) of the causal structure. This is not optional.
 
@@ -69,7 +82,7 @@ Draw a directed acyclic graph (DAG) of the causal structure. This is not optiona
 
 ---
 
-## Step 3: Identify Open Backdoor Paths
+## Step 5: Identify Open Backdoor Paths
 
 A backdoor path is any non-causal path from T to Y (one that goes "backward" through T's causes).
 
@@ -87,7 +100,7 @@ If the backdoor criterion cannot be satisfied (because confounders are unmeasure
 
 ---
 
-## Step 4: Collider Check
+## Step 6: Collider Check
 
 Before specifying your adjustment set, check whether any candidate control variable is a collider — a variable caused by both T and Y (or their causes).
 
@@ -95,21 +108,23 @@ Conditioning on a collider **opens** a spurious path. This is a common error.
 
 > Example: If "notification opened" is caused by both receiving a notification (T) and by the user already being engaged (a cause of Y), then conditioning on "opened" opens a spurious path between T and Y.
 
+> Second example: "Published results" is a collider on system quality and having a verifier — good teams publish AND teams with verifiers publish. Conditioning on "published" makes it look like verifiers cause quality, when both are caused by something else.
+
 If a proposed control variable has arrows pointing *into* it from multiple other variables, it may be a collider. Do not include it in the adjustment set without checking the graph.
 
 ---
 
-## Step 5: Specify the Adjustment Set
+## Step 7: Specify the Adjustment Set
 
 From the DAG analysis, list the variables that must be conditioned on to block all backdoor paths without opening collider paths.
 
-If the adjustment set is feasible (all variables are measured): the effect may be identifiable from observational data. Proceed to Step 6a.
+If the adjustment set is feasible (all variables are measured): the effect may be identifiable from observational data. Proceed to Step 8a.
 
-If the adjustment set requires unmeasured variables: the effect is not identified from observational data. Proceed to Step 6b.
+If the adjustment set requires unmeasured variables: the effect is not identified from observational data. Proceed to Step 8b.
 
 ---
 
-## Step 6a: Observational Study Design (if identifiable)
+## Step 8a: Observational Study Design (if identifiable)
 
 If the effect is identified from observational data via the adjustment set:
 
@@ -120,7 +135,7 @@ If the effect is identified from observational data via the adjustment set:
 
 ---
 
-## Step 6b: Experiment Design (if not identifiable from observational data)
+## Step 8b: Experiment Design (if not identifiable from observational data)
 
 If unmeasured confounders block identification, random assignment is required.
 
@@ -136,7 +151,7 @@ If unmeasured confounders block identification, random assignment is required.
 
 ---
 
-## Step 7: Threat Assessment
+## Step 9: Threat Assessment
 
 Before finalizing, run through the threat list:
 
@@ -150,6 +165,7 @@ Before finalizing, run through the threat list:
 | **Measurement error in T** | Is treatment receipt measured accurately? |
 | **Attrition / selection into outcome** | Does missingness in Y depend on T or confounders? |
 | **External validity** | Does the study population match the target population for the intervention? |
+| **Time-varying confounding** | In systems that evolve (e.g., software across releases), before/after comparisons are confounded by everything else that changed between versions. |
 
 ---
 

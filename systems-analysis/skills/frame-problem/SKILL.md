@@ -64,7 +64,7 @@ This skill has no clean stopping rule. Fodor: "The frame problem is just Hamlet'
 - **Can't name the frame because you don't have a model** → start with **representing-and-intervening**. You need R&I's Represent phase before you can name what you're holding constant.
 - **Frame check reveals the problem definition itself is wrong** → return to **representing-and-intervening** (Problem Setting / Schon). The frame error is upstream of any solution.
 - **Frame check reveals a regulation mismatch** → switch to **requisite-variety**. The frame was "this regulator is sufficient" and it isn't.
-- **Need to establish whether a causal assumption in the frame actually holds** → switch to **design-causal-study**. The frame contains a causal claim that hasn't been tested.
+- **Need to establish whether a causal assumption in the frame actually holds** → switch to **causal-analysis**. The frame contains a causal claim that hasn't been tested.
 - **Frame is solid, assumptions verified, ready to act** → if **writing-plans** is available, use it to structure the work.
 
 The frame problem is meta-epistemic: *what am I assuming without examining, and is that assumption still valid?*
