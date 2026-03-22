@@ -17,6 +17,7 @@ Apply in order when you suspect your frame may be wrong:
 | **Check Freshness** | When was this information gathered, and what has happened since? | Check mtimes (`ls -l`) on files you're about to modify — if newer than your last read, re-read them. Turns passed since last read? User mentioned doing something? Your own prior actions had side effects? CI or deployments may have run? |
 | **Check Scope** | Am I solving the right problem? | The frame includes the problem definition itself. If the user says "it's a caching issue," that's a frame. The most consequential assumption is often which problem you're solving, not how. |
 | **Name the Blind Spots** | What kind of change would my current vocabulary not let me notice? | Your ontology determines what changes are visible to you. This is the hardest action — an admission of bounded rationality, stated out loud. |
+| **Rate Confidence** | What part of this frame am I least confident about? | Name it. That's where to direct verification effort — and where to warn the human that your reasoning is weakest. |
 
 ## Failure Modes (Dennett's Three Robots)
 
@@ -52,6 +53,11 @@ This skill has no clean stopping rule. Fodor: "The frame problem is just Hamlet'
 | "Let me be thorough and check everything" | R1D1. You can't check everything. Name what matters most and why. |
 | "This is too simple to have side effects" | R1. Simplicity of your model ≠ simplicity of the system. |
 | "I'll verify after" | Post-hoc verification confirms your frame; it doesn't test it. |
+
+## Examples
+
+- [Stale cache assumption](examples/stale-cache-assumption.md) — team debugs cache when the real problem is corrupted migration data
+- [Inherited problem framing](examples/inherited-problem-framing.md) — ticket requests rate limiting for a problem that async processing already solved
 
 ## Transition Signals
 

@@ -88,6 +88,7 @@ Each skill can hand off to the others when the situation shifts. Debugging may r
 - Hayes, P. J. (1973). The frame problem and related problems in artificial intelligence. University of Edinburgh.
 - McCarthy, J. & Hayes, P. J. (1969). Some philosophical problems from the standpoint of artificial intelligence. *Machine Intelligence*, 4, 463–502.
 - Pearl, J. & Mackenzie, D. (2018). *The Book of Why*. Basic Books.
+- Saravia, E. (2022). *Prompt Engineering Guide*. https://github.com/dair-ai/Prompt-Engineering-Guide
 - Schon, D. A. (1983). *The Reflective Practitioner*. Basic Books.
 - Shanahan, M. (1997). *Solving the Frame Problem*. MIT Press.
 

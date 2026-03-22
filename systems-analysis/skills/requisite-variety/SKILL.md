@@ -15,7 +15,7 @@ Three principles for regulation and control. Sources: Ashby (1956), Conant & Ash
 | **Good Regulator** | Every good regulator must be a model of the system it regulates. Variety without structure is brute force. | Does the regulator contain a model of the system — or is it pattern-matching without representation? |
 | **Constraints** | When the system is too large for brute-force regulation, discovering structure (constraints) in the disturbances is the regulator's only path. | Can you find constraints that reduce D's effective variety below R's capacity? |
 
-Apply in order: first check variety (capacity), then check model (structure), then look for constraints (tractability).
+Apply in order: first check variety (capacity), then check model (structure), then look for constraints (tractability). At each step, note what you're least confident about — that's where the analysis is weakest and where you should warn the human.
 
 ## Error-Controlled Regulation
 
@@ -30,6 +30,8 @@ A feedback regulator is inherently imperfect: the more successfully it holds E c
 - **η** — acceptable range for E
 
 A good regulator blocks the flow of variety from D to E. Test: can you tell from E what disturbances occurred? If yes, regulation is failing.
+
+**Prefer executable verification.** If you can count D's states, enumerate R's responses, or measure E's variance, do that rather than reasoning about it. A computed variety gap is more convincing than an argued one.
 
 ## Worked Example: WAF That Can't Keep Up
 
@@ -61,6 +63,10 @@ A team has 200+ custom WAF rules but keeps getting breached. The SOC wants more 
 | "Too complex to model" | Then too complex to regulate. Find constraints first. |
 | "More data helps" | Only if R can act on it. Variety bounds what R can do. |
 | "We need more rules" | Do rules *can* keep up? If D is adaptive, enumeration loses. |
+
+## Examples
+
+- [Alert fatigue](examples/alert-fatigue.md) — 400 rules with 15 effective responses, executable variety counting, constraint discovery
 
 ## Transition Signals
 

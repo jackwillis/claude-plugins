@@ -11,6 +11,12 @@ Correlation does not establish cause. Before recommending an intervention or des
 
 Follow the steps in order. Do not skip to study design before completing the DAG and identifiability check.
 
+## Step 0: Gather Context
+
+Before defining anything, generate what you know about this system. What's been tried? What constraints exist? What data is available? What domain knowledge is relevant? State what you're confident about and what you're uncertain about — uncertainty tells you where the DAG edges are weakest and where sensitivity analysis matters most.
+
+If you're entering from **representing-and-intervening**, the Represent phase already covers this. Otherwise, do it now.
+
 ## Pearl's Causal Ladder
 
 Before anything else, locate the question on the ladder:
@@ -52,7 +58,7 @@ Draw a directed acyclic graph (DAG) of the causal structure. This is not optiona
 - **Col** — Colliders (common effects of two variables — do not adjust for these)
 - **U** — Unmeasured variables (note them even if you can't use them)
 
-**Draw edges for every plausible direct causal relationship.** Ask for each pair: "Could X directly cause Y, independent of all other variables?"
+**Draw edges for every plausible direct causal relationship.** Ask for each pair: "Could X directly cause Y, independent of all other variables?" For each edge, note your confidence — low-confidence edges are where sensitivity analysis should focus.
 
 **Common confounders to check:**
 - Selection mechanism: what determines treatment assignment? Is that mechanism causally related to the outcome?
@@ -173,6 +179,10 @@ What this study can and cannot answer: [1-2 sentences]
 | Treating selection as confounding | Reverse causation requires time-ordering check, not just adjustment |
 | Running an experiment on the wrong population | Eligibility criteria must match the estimand's target population |
 | Choosing outcomes post-hoc | Pre-specify primary outcome before data collection or analysis |
+
+## Examples
+
+- [Push notifications and retention](examples/notification-retention.md) — engagement as confounder, incomplete adjustment set, experiment recommendation
 
 ## Transition Signals
 

@@ -11,9 +11,9 @@ You must model a system before predicting its behavior, and predict before inter
 
 | Phase | Action | Gate |
 |-------|--------|------|
-| **Represent** | State the model: components, relationships, assumptions | — |
-| **Predict** | What should we observe? Write it down. | No intervention without written prediction |
-| **Intervene** | Pick one test from the repertoire. Compare result to prediction. | One variable at a time |
+| **Represent** | State the model: components, relationships, assumptions. Then state one alternative model that explains the same observations differently. Where do the two models diverge? | — |
+| **Predict** | What should we observe? Write it down. What part of your model are you least confident about? Target that first. | No intervention without written prediction |
+| **Intervene** | Pick one test from the repertoire — prefer the one that distinguishes between your competing models. Compare result to prediction. | One variable at a time |
 | **Observe** | Record actual vs. predicted | — |
 | **Update** | Prediction wrong? → See Update Decision | — |
 
@@ -27,6 +27,8 @@ You must model a system before predicting its behavior, and predict before inter
 ## Intervention Repertoire
 
 Before picking a test, enumerate what's available: script runner, write a spec, read logs, inspect generated queries, add instrumentation, run a benchmark. The first one you think of is rarely the most informative. Pick the one that most directly tests the prediction.
+
+**Prefer executable verification.** If a claim can be checked by running code — a test, a query, a count, a timing measurement — do that instead of reasoning about it in prose. Computed results are more reliable than inferred ones.
 
 ## Problem Setting (Schon)
 
@@ -71,6 +73,11 @@ Stop and return to Represent if you catch yourself:
 | "Predicting is overhead" | 30 seconds to predict vs. hours of undirected intervention. |
 | "Let me give you a checklist" | Checklist = intervention without representation. Model first. |
 | "The user said it's X" | Agreement ≠ diagnosis. Check the frame. |
+
+## Examples
+
+- [Flaky integration test](examples/flaky-test.md) — competing models (insertion order vs. race condition), executable verification
+- [API latency spike](examples/slow-api.md) — competing models (N+1 vs. index), query counting to distinguish them
 
 ## Transition Signals
 
