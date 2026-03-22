@@ -8,9 +8,9 @@
 
 AI coding agents are biased toward action. They'll try a fix before understanding why something broke, add more rules when the problem is that rules can't keep up, or assume one thing causes another just because they happen together. These are the same mistakes humans make, just faster.
 
-This plugin adds four skills that come back to one question: **do you understand the system you're about to change?** Skills activate automatically when Claude detects a matching situation, and can also be called directly with slash commands.
+The systems-analysis plugin adds four skills that come back to one question: **do you understand the system you're about to change?** Skills activate automatically when Claude detects a matching situation, and can also be called directly with slash commands. A second plugin, text-utils, adds utilities for working with web content and PDFs.
 
-### What it looks like
+### What it looks like (ideal)
 
 You tell Claude a test passes locally but fails 30% of the time in CI. Without this plugin, it guesses "race condition" and starts adding sleep calls and retries.
 
@@ -54,30 +54,12 @@ Stop debugging by trial and error. This skill makes Claude write down what it th
 
 <img src="assets/representing-and-intervening.svg" width="120">
 
-<details>
-<summary>Example: API latency spike</summary>
-
-You report that an API endpoint got slow after a deploy. Without the skill, Claude assumes "N+1 query" and starts adding eager loading.
-
-With the skill, Claude states two competing models — N+1 queries vs. an index that no longer fits in memory — and identifies a test that distinguishes them: enable query logging and compare a minimal request to a heavy one. If it's N+1, the heavy request should have many more queries. It does. Model confirmed. Fix: batch load with `WHERE id IN (...)`.
-
-</details>
-
 #### Check Your Controls
 *`/requisite-variety` — Ashby (1956), Conant & Ashby (1970)*
 
 Stop adding more rules when rules can't keep up. This skill checks whether your controls can actually handle the range of problems they'll face, whether they model how the system actually works, and whether there's structure in the problem you can exploit instead of brute-forcing it.
 
 <img src="assets/requisite-variety.svg" width="120">
-
-<details>
-<summary>Example: Alert fatigue</summary>
-
-An SRE team has 400+ alert rules but 95% are false positives. They want more precise rules.
-
-With the skill, Claude counts the disturbance variety (47 distinct root cause categories in 90 days) vs. the regulator's effective variety (15 — one threshold per metric, not 400). The gap is structural: more rules can't close it. 80% of false positives come from three predictable patterns (deploy windows, autoscaler ramps, noisy dependency checks). Instead of more rules, Claude recommends consolidating to ~20 SLO-based alerts with deployment context — reducing the problem to something the regulator can actually handle.
-
-</details>
 
 #### Verify Causal Claims
 *`/causal-analysis` — Pearl & Mackenzie (2018)*
@@ -86,30 +68,12 @@ Stop assuming that correlation means causation. Whether you're designing a study
 
 <img src="assets/causal-analysis.svg" width="120">
 
-<details>
-<summary>Example: Do push notifications improve retention?</summary>
-
-Product sees that users who receive push notifications have 20% higher 30-day retention. They want to send more notifications.
-
-With the skill, Claude places the claim on Pearl's ladder: the question is interventional (Rung 2 — "what happens if we send more?") but the evidence is observational (Rung 1 — "users who get notifications also retain"). It draws the causal structure and identifies the confounder: notifications are targeted at already-engaged users. The 20% lift might just be engagement, not notifications. Claude recommends a randomized holdout test (withhold notifications from 10% of eligible users for 30 days) instead of shipping more notifications based on confounded data.
-
-</details>
-
 #### Surface Stale Assumptions
 *`/frame-problem` — Fodor (1987), Dennett (1984), Hayes (1973)*
 
 Stop acting on assumptions that may no longer hold. Every action assumes things that stay the same — this skill makes Claude name those assumptions and check whether they're still true. It catches three failure modes: ignoring side effects, trying to consider everything, and getting stuck deciding what's relevant.
 
 <img src="assets/frame-problem.svg" width="120">
-
-<details>
-<summary>Example: The ticket that solved itself</summary>
-
-A two-sprint-old ticket says "Implement rate limiting on /export — CPU spikes from too many large exports." Claude is about to build a rate limiter.
-
-With the skill, Claude checks freshness: the ticket is two sprints old. Since then, the team migrated exports to async job processing. Has anyone checked whether the CPU spike still happens? No. Claude checks monitoring — CPU spikes stopped after the migration. The ticket is obsolete. A rate limiter would add complexity for a problem that no longer exists.
-
-</details>
 
 #### Transitions
 
