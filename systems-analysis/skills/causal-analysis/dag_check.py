@@ -128,6 +128,116 @@ def is_directed_acyclic_graph(G):
 
 
 # ---------------------------------------------------------------------------
+# d-separation, vendored from networkx 3.6.1 (BSD-3) and adapted to the DAG
+# shim above. See module docstring for the full license and citations.
+# ---------------------------------------------------------------------------
+
+def _as_set(G, s):
+    return {s} if s in G else set(s)
+
+
+def is_d_separator(G, x, y, z):
+    """Return whether node sets `x` and `y` are d-separated by `z` in DAG `G`."""
+    x = _as_set(G, x)
+    y = _as_set(G, y)
+    z = _as_set(G, z)
+
+    intersection = x & y or x & z or y & z
+    if intersection:
+        raise CausalError(f"sets are not disjoint, intersection {intersection}")
+    set_v = x | y | z
+    if set_v - G.nodes:
+        raise NodeNotFound(f"nodes not in graph: {set_v - G.nodes}")
+    if not is_directed_acyclic_graph(G):
+        raise CausalError("graph should be directed acyclic")
+
+    forward_deque = deque()
+    forward_visited = set()
+    backward_deque = deque(x)
+    backward_visited = set()
+    ancestors_or_z = set().union(*[ancestors(G, n) for n in x]) | z | x
+
+    while forward_deque or backward_deque:
+        if backward_deque:
+            node = backward_deque.popleft()
+            backward_visited.add(node)
+            if node in y:
+                return False
+            if node in z:
+                continue
+            backward_deque.extend(G.pred[node].keys() - backward_visited)
+            forward_deque.extend(G.succ[node].keys() - forward_visited)
+        if forward_deque:
+            node = forward_deque.popleft()
+            forward_visited.add(node)
+            if node in y:
+                return False
+            if node in ancestors_or_z:
+                backward_deque.extend(G.pred[node].keys() - backward_visited)
+            if node not in z:
+                forward_deque.extend(G.succ[node].keys() - forward_visited)
+    return True
+
+
+def _reachable(G, x, a, z):
+    """Modified Bayes-Ball: nodes in `a` d-connected to `x` given `z`."""
+    def _pass(e, v, f, n):
+        is_element_of_A = n in a
+        collider_if_in_Z = v not in z or (e and not f)
+        return is_element_of_A and collider_if_in_Z
+
+    queue = deque()
+    for node in x:
+        if bool(G.pred[node]):
+            queue.append((True, node))
+        if bool(G.succ[node]):
+            queue.append((False, node))
+    processed = list(queue)
+
+    while queue:
+        e, v = queue.popleft()
+        preds = ((False, n) for n in G.pred[v])
+        succs = ((True, n) for n in G.succ[v])
+        for f, n in chain(preds, succs):
+            if (f, n) not in processed and _pass(e, v, f, n):
+                queue.append((f, n))
+                processed.append((f, n))
+
+    return {w for (_, w) in processed}
+
+
+def find_minimal_d_separator(G, x, y, included=None, restricted=None):
+    """Return a minimal d-separator of `x` and `y` within `restricted`,
+    containing `included`, or None if no d-separator exists."""
+    if not is_directed_acyclic_graph(G):
+        raise CausalError("graph should be directed acyclic")
+
+    x = _as_set(G, x)
+    y = _as_set(G, y)
+    included = set() if included is None else _as_set(G, included)
+    restricted = set(G) if restricted is None else _as_set(G, restricted)
+
+    set_y = x | y | included | restricted
+    if set_y - G.nodes:
+        raise NodeNotFound(f"nodes not in graph: {set_y - G.nodes}")
+    if not included <= restricted:
+        raise CausalError(f"included {included} must be within restricted {restricted}")
+    intersection = x & y or x & included or y & included
+    if intersection:
+        raise CausalError(f"x, y, included not disjoint: {intersection}")
+
+    nodeset = x | y | included
+    anc = nodeset.union(*[ancestors(G, n) for n in nodeset])
+    z_init = restricted & (anc - (x | y))
+    x_closure = _reachable(G, x, anc, z_init)
+    if x_closure & y:
+        return None
+    z_updated = z_init & (x_closure | included)
+    y_closure = _reachable(G, y, anc, z_updated)
+    return z_updated & (y_closure | included)
+
+
+# ---------------------------------------------------------------------------
 # Selftest harness (vectors added across tasks).
 # ---------------------------------------------------------------------------
 
@@ -145,6 +255,44 @@ def run_selftest():
     _check("isolated node preserved", "X" in DAG([("A", "B")], nodes=["X"]), True)
     _check("acyclic", is_directed_acyclic_graph(g), True)
     _check("cyclic", is_directed_acyclic_graph(DAG([("A", "B"), ("B", "A")])), False)
+
+    # Task 2: vendored d-separation (vectors adapted from networkx 3.6.1
+    # networkx/algorithms/tests/test_d_separation.py, BSD-3).
+    path = DAG([(0, 1), (1, 2)])
+    _check("path dsep {1}", is_d_separator(path, {0}, {2}, {1}), True)
+    _check("path dsep {}", is_d_separator(path, {0}, {2}, set()), False)
+
+    fork = DAG([(0, 1), (0, 2)])
+    _check("fork dsep {0}", is_d_separator(fork, {1}, {2}, {0}), True)
+    _check("fork dsep {}", is_d_separator(fork, {1}, {2}, set()), False)
+
+    collider = DAG([(0, 2), (1, 2)])
+    _check("collider dsep {}", is_d_separator(collider, {0}, {1}, set()), True)
+    _check("collider open on {2}", is_d_separator(collider, {0}, {1}, {2}), False)
+
+    asia = DAG([
+        ("asia", "tuberculosis"), ("smoking", "cancer"), ("smoking", "bronchitis"),
+        ("tuberculosis", "either"), ("cancer", "either"), ("either", "xray"),
+        ("either", "dyspnea"), ("bronchitis", "dyspnea"),
+    ])
+    _check("asia dsep", is_d_separator(
+        asia, {"asia", "smoking"}, {"dyspnea", "xray"}, {"bronchitis", "either"}), True)
+
+    large = DAG([("A", "B"), ("C", "B"), ("B", "D"), ("D", "E"), ("B", "F"), ("G", "E")])
+    _check("large_collider not sep {}", is_d_separator(large, {"B"}, {"E"}, set()), False)
+    zmin = find_minimal_d_separator(large, "B", "E")
+    _check("large_collider min sep", zmin, {"D"})
+    _check("large_collider min is sep", is_d_separator(large, "B", "E", zmin), True)
+
+    cf = DAG([("A", "B"), ("B", "C"), ("B", "D"), ("D", "C")])
+    _check("chain_fork min sep", find_minimal_d_separator(cf, "A", "C"), {"B"})
+
+    nosep = DAG([("A", "B")])
+    _check("no separating set", find_minimal_d_separator(nosep, "A", "B"), None)
+
+    nosep2 = DAG([("A", "B"), ("C", "A"), ("C", "B")])
+    _check("no sep (confounded)", find_minimal_d_separator(nosep2, "A", "B"), None)
+
     print("ALL SELFTESTS PASSED")
 
 
