@@ -24,6 +24,12 @@ You'll see Claude push back on causal language that isn't supported by the study
 
 For simple causal structures, it states the estimand and the main threat in a sentence each.
 
+## How the graph math is done
+
+Rather than reasoning about d-separation, backdoor paths, and adjustment sets by hand, the skill emits the DAG as a JSON spec and runs a bundled solver, `dag_check.py`, to compute them. The script reports the backdoor paths (each marked open or blocked), a valid adjustment set or a verdict that the effect is not identifiable, and a classification of each node as confounder, mediator, descendant, or collider.
+
+The script is pure standard-library Python — no install or dependencies needed. After reading off the result, the skill appends a plain-language explanation so the conclusion is legible to readers who don't know the graph terminology.
+
 ## Examples
 
 **Collider bias in hiring.** A company finds no correlation between degree prestige and job performance among employees. The expected output identifies "Hired" as a collider — by only looking at hired employees, you've induced a spurious negative association. The null finding is exactly what collider bias predicts, even if degrees genuinely matter.
