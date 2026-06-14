@@ -84,51 +84,54 @@ Draw a directed acyclic graph (DAG) of the causal structure. This is not optiona
 
 **Reverse causation check:** Could Y (or early Y) cause T? If yes, add that edge. This is selection bias.
 
----
+**Emit the DAG as data.** After drawing it, write the graph as a JSON spec so the
+identifiability check can run on it:
 
-## Step 5: Identify Open Backdoor Paths
+```json
+{"edges": [["Engagement","Notif"], ["Engagement","Retention"], ["Notif","Retention"]],
+ "treatment": "Notif", "outcome": "Retention",
+ "unobserved": ["Engagement"], "adjustment_set": ["Engagement"]}
+```
 
-A backdoor path is any non-causal path from T to Y (one that goes "backward" through T's causes).
-
-List every backdoor path: T ← C → Y
-
-For each path, check:
-- Is it open? (no colliders blocking it, no conditioning on a collider opening it)
-- Is it blocked by conditioning on a variable in the path?
-
-**Backdoor criterion:** The effect of T on Y is identifiable from observational data if you can find an adjustment set Z such that:
-1. Z blocks all backdoor paths from T to Y
-2. Z contains no descendants of T (no mediators or colliders on T→Y paths)
-
-If the backdoor criterion cannot be satisfied (because confounders are unmeasured), check the frontdoor criterion or instrumental variable conditions.
+`edges` is the list of directed edges; `treatment`/`outcome` name T and Y; `unobserved`
+lists nodes that exist causally but aren't measured (they're excluded from candidate
+adjustment sets); `adjustment_set` (optional) is a set you want validated. Edge-confidence
+notes stay in your prose, not the JSON.
 
 ---
 
-## Step 6: Collider Check
+## Step 5: Run the Identifiability Check
 
-Before specifying your adjustment set, check whether any candidate control variable is a collider — a variable caused by both T and Y (or their causes).
+Do not enumerate backdoor paths or pick an adjustment set by hand — that graph reasoning
+is mechanical and error-prone to do in your head. Run the check on the DAG you emitted:
 
-Conditioning on a collider **opens** a spurious path. This is a common error.
+```bash
+echo '<the JSON spec from Step 4>' | python3 dag_check.py
+```
 
-> Example: If "notification opened" is caused by both receiving a notification (T) and by the user already being engaged (a cause of Y), then conditioning on "opened" opens a spurious path between T and Y.
+(The script is in this skill's directory: `skills/causal-analysis/dag_check.py`. It is
+pure standard-library Python — no install needed. If `python3` is genuinely unavailable,
+fall back to the manual rules in the appendix at the end of this skill.)
 
-> Second example: "Published results" is a collider on system quality and having a verifier — good teams publish AND teams with verifiers publish. Conditioning on "published" makes it look like verifiers cause quality, when both are caused by something else.
+The report tells you:
 
-If a proposed control variable has arrows pointing *into* it from multiple other variables, it may be a collider. Do not include it in the adjustment set without checking the graph.
+- **Backdoor paths**, each marked OPEN or BLOCKED. Open paths confound the estimate.
+- **Adjustment set** — a minimal set of observed variables to condition on, OR
+  `{}` (identifiable, no adjustment needed), OR `not identifiable` (an unmeasured
+  confounder blocks backdoor adjustment — go to Step 6b).
+- **Proposed set validation** — if you supplied `adjustment_set`, whether it is valid
+  (and why not, if it adjusts a collider or a descendant of the treatment).
+- **Node classification** — mediators and descendants of the treatment (never adjust for
+  these), collider-ish nodes (adjusting them opens spurious paths), and confounder
+  candidates.
+
+Read the verdict off the report rather than re-deriving it. If the report says
+`not identifiable`, the effect cannot be obtained from observational data by adjustment;
+proceed to Step 6b (experiment design).
 
 ---
 
-## Step 7: Specify the Adjustment Set
-
-From the DAG analysis, list the variables that must be conditioned on to block all backdoor paths without opening collider paths.
-
-If the adjustment set is feasible (all variables are measured): the effect may be identifiable from observational data. Proceed to Step 8a.
-
-If the adjustment set requires unmeasured variables: the effect is not identified from observational data. Proceed to Step 8b.
-
----
-
-## Step 8a: Observational Study Design (if identifiable)
+## Step 6a: Observational Study Design (if identifiable)
 
 If the effect is identified from observational data via the adjustment set:
 
@@ -139,7 +142,7 @@ If the effect is identified from observational data via the adjustment set:
 
 ---
 
-## Step 8b: Experiment Design (if not identifiable from observational data)
+## Step 6b: Experiment Design (if not identifiable from observational data)
 
 If unmeasured confounders block identification, random assignment is required.
 
@@ -155,7 +158,7 @@ If unmeasured confounders block identification, random assignment is required.
 
 ---
 
-## Step 9: Threat Assessment
+## Step 7: Threat Assessment
 
 Before finalizing, run through the threat list:
 
@@ -186,6 +189,21 @@ Recommended design: [observational with adjustment / experiment with holdout]
 Key threats: [top 2-3]
 What this study can and cannot answer: [1-2 sentences]
 ```
+
+Then append a plain-language layer for readers who don't know causal inference — keep the
+technical summary above it intact:
+
+```
+In plain terms: We want to know whether [doing T] actually changes [Y], not just whether
+they show up together. Right now the numbers could look this way because [confounder, in
+plain words] drives both — the way a falling barometer predicts a storm without causing
+it. To call it cause, we'd have to compare like with like by accounting for [confounders],
+which [we can / can't] do with this data.
+```
+
+If the check flagged a collider, add one sentence: conditioning on [collider] is like
+judging dating partners you've only met because they were attractive or kind — it
+manufactures a correlation that isn't really there.
 
 ---
 
@@ -218,3 +236,12 @@ What this study can and cannot answer: [1-2 sentences]
 - **Causal structure reveals a regulation problem** (not enough control variety to act on identified causes) → suggest **requisite-variety** to the user.
 - **Can't state the estimand** — the question may not be causal yet. Suggest **representing-and-intervening** to the user to model the system first.
 - **Study designed, ready to execute** — if **writing-plans** is available, suggest it to the user to structure the study execution. For independent workstreams (e.g., data extraction, power analysis, sensitivity analysis), suggest **subagent-driven-development**.
+
+## Appendix: Manual Backdoor Tracing (fallback only)
+
+Use this only if `python3` is unavailable. A backdoor path is any path from T to Y
+starting with an arrow into T (T ← …). List every such path. A path is blocked if it
+contains a non-collider you condition on, or a collider (→ C ←) that you do not condition
+on (and none of whose descendants you condition on). A valid adjustment set blocks every
+backdoor path, contains no descendant of T, and adjusts no collider. If no such set
+exists among measured variables, the effect is not identifiable from observational data.
