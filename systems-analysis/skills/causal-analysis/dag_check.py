@@ -238,6 +238,112 @@ def find_minimal_d_separator(G, x, y, included=None, restricted=None):
 
 
 # ---------------------------------------------------------------------------
+# Backdoor criterion, composed from the d-separation primitives above.
+# A backdoor path begins with an arrow INTO the treatment, so we isolate them
+# by removing the treatment's OUTGOING edges; every remaining T->Y path is then
+# a backdoor path.
+# ---------------------------------------------------------------------------
+
+def backdoor_graph(G, treatment):
+    """`G` with the treatment's outgoing edges removed (all nodes preserved)."""
+    edges = [(u, v) for u in G.succ for v in G.succ[u] if u != treatment]
+    return DAG(edges, nodes=G.nodes)
+
+
+def find_adjustment_set(G, treatment, outcome, observed):
+    """A minimal valid backdoor adjustment set over `observed` variables.
+
+    Returns a set (possibly empty -> identifiable with no adjustment needed),
+    or None if the effect is not identifiable by backdoor adjustment.
+    """
+    bg = backdoor_graph(G, treatment)
+    restricted = (set(observed) - descendants(G, treatment)) - {treatment, outcome}
+    return find_minimal_d_separator(bg, treatment, outcome, restricted=restricted)
+
+
+def validate_adjustment_set(G, treatment, outcome, Z):
+    """(ok, reason) for a proposed adjustment set `Z`."""
+    Z = set(Z)
+    if treatment in Z or outcome in Z:
+        return (False, "adjustment set must not contain the treatment or outcome")
+    bad = Z & descendants(G, treatment)
+    if bad:
+        return (False, f"contains descendants of treatment: {sorted(bad)}")
+    bg = backdoor_graph(G, treatment)
+    if is_d_separator(bg, treatment, outcome, Z):
+        return (True, "blocks all backdoor paths without opening a collider")
+    return (False, "does not block all backdoor paths")
+
+
+def classify_nodes(G, treatment, outcome):
+    """Label each non-T/Y node: mediator / descendant-of-treatment / collider-ish /
+    confounder candidate / other."""
+    desc_t = descendants(G, treatment)
+    anc_t = ancestors(G, treatment)
+    anc_y = ancestors(G, outcome)
+    result = {}
+    for n in G.nodes:
+        if n in (treatment, outcome):
+            continue
+        labels = []
+        if n in desc_t and n in anc_y:
+            labels.append("mediator")
+        if n in desc_t:
+            labels.append("descendant-of-treatment (do not adjust)")
+        if len(G.pred[n]) >= 2:
+            labels.append("collider-ish (>=2 parents)")
+        if n in anc_t and n in anc_y:
+            labels.append("confounder candidate")
+        result[n] = labels or ["other"]
+    return result
+
+
+def _undirected_neighbors(G, n):
+    return set(G.succ[n]) | set(G.pred[n])
+
+
+def backdoor_paths(G, treatment, outcome):
+    """All simple paths (as node lists) from treatment to outcome whose first
+    edge points INTO the treatment (i.e. the backdoor paths)."""
+    paths = []
+
+    def dfs(node, visited, path):
+        if node == outcome:
+            paths.append(list(path))
+            return
+        for nb in _undirected_neighbors(G, node):
+            if nb in visited:
+                continue
+            if node == treatment and nb not in G.pred[treatment]:
+                continue  # restrict the first step to backdoor edges
+            visited.add(nb)
+            path.append(nb)
+            dfs(nb, visited, path)
+            path.pop()
+            visited.discard(nb)
+
+    dfs(treatment, {treatment}, [treatment])
+    return paths
+
+
+def is_path_blocked(G, path, Z):
+    """Whether `path` (a node list) is blocked given conditioning set `Z`."""
+    Z = set(Z)
+    for i in range(1, len(path) - 1):
+        prev, cur, nxt = path[i - 1], path[i], path[i + 1]
+        into_from_prev = cur in G.succ[prev]   # prev -> cur
+        into_from_next = cur in G.succ[nxt]    # nxt -> cur
+        is_collider = into_from_prev and into_from_next
+        if is_collider:
+            if not ((descendants(G, cur) | {cur}) & Z):
+                return True  # collider not opened -> blocked
+        else:
+            if cur in Z:
+                return True  # non-collider in Z -> blocked
+    return False
+
+
+# ---------------------------------------------------------------------------
 # Selftest harness (vectors added across tasks).
 # ---------------------------------------------------------------------------
 
@@ -292,6 +398,26 @@ def run_selftest():
 
     nosep2 = DAG([("A", "B"), ("C", "A"), ("C", "B")])
     _check("no sep (confounded)", find_minimal_d_separator(nosep2, "A", "B"), None)
+
+    # Task 3: backdoor logic.
+    conf = DAG([("E", "T"), ("E", "Y"), ("T", "Y")])
+    _check("confounder adj set", find_adjustment_set(conf, "T", "Y", conf.nodes), {"E"})
+
+    frontdoor = DAG([("U", "T"), ("U", "Y"), ("T", "M"), ("M", "Y")])
+    fd_observed = frontdoor.nodes - {"U"}
+    _check("frontdoor not backdoor-identifiable",
+           find_adjustment_set(frontdoor, "T", "Y", fd_observed), None)
+
+    mgraph = DAG([("U1", "T"), ("U1", "Z"), ("U2", "Z"), ("U2", "Y"), ("T", "Y")])
+    m_observed = mgraph.nodes - {"U1", "U2"}  # {T, Y, Z}
+    _check("m-graph empty adj set",
+           find_adjustment_set(mgraph, "T", "Y", m_observed), set())
+    _check("m-graph adjusting collider is invalid",
+           validate_adjustment_set(mgraph, "T", "Y", {"Z"})[0], False)
+    _check("confounder proposed set valid",
+           validate_adjustment_set(conf, "T", "Y", {"E"})[0], True)
+    _check("classify mediator",
+           "mediator" in classify_nodes(frontdoor, "T", "Y")["M"], True)
 
     print("ALL SELFTESTS PASSED")
 
