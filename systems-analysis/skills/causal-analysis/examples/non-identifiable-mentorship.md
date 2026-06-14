@@ -24,25 +24,15 @@ Mentorship (T) → Promotion (Y)
 
 U is the unmeasured set of traits that drive both mentor selection and promotion. Mentorship may also have a direct causal effect on promotion — that's what we want to estimate — but U confounds the naive comparison.
 
-## Step 5: Backdoor Paths
-
-T ← U → Y. One open backdoor path through the unmeasured confounder.
-
-## Step 6: Collider Check
-
-No colliders in this structure.
-
-## Step 7: Adjustment Set
-
-The only variable that blocks the backdoor path is U, which is unmeasured. No observable adjustment set satisfies the backdoor criterion. The effect is **not identifiable** from this data.
-
-Controlling for observable proxies (job title, tenure, performance ratings) does not solve the problem unless they fully mediate U's effect on both T and Y — and "ambition" and "political savvy" are precisely the things HR data doesn't capture.
-
-Marking the confounder as `unobserved` and running `dag_check.py` confirms there is no observable adjustment set:
+Emit the DAG as a spec for `dag_check.py`, marking the confounder as `unobserved`:
 
 ```json
 {"edges":[["AmbitionVisibility","Mentorship"],["AmbitionVisibility","Promotion"],["Mentorship","Promotion"]],"treatment":"Mentorship","outcome":"Promotion","unobserved":["AmbitionVisibility"]}
 ```
+
+## Step 5: Run the Identifiability Check
+
+The structure has one backdoor path (Mentorship ← U → Promotion) and no colliders. The only variable that blocks the path is U, which is unmeasured — so no observable adjustment set satisfies the backdoor criterion. Controlling for observable proxies (job title, tenure, performance ratings) does not solve the problem unless they fully mediate U's effect on both T and Y, and "ambition" and "political savvy" are precisely the things HR data doesn't capture.
 
 ```bash
 echo '{"edges":[["AmbitionVisibility","Mentorship"],["AmbitionVisibility","Promotion"],["Mentorship","Promotion"]],"treatment":"Mentorship","outcome":"Promotion","unobserved":["AmbitionVisibility"]}' | python3 systems-analysis/skills/causal-analysis/dag_check.py
@@ -62,11 +52,11 @@ Node classification:
   AmbitionVisibility: confounder candidate
 ```
 
-The path through Ambition/Visibility stays OPEN, and because that node is unobserved, no adjustment set can close it. The tool's recommendation — front-door, an instrument, or an experiment — is exactly what Step 8b proposes.
+The path through Ambition/Visibility stays OPEN, and because that node is unobserved, no adjustment set can close it. The effect is **not identifiable** from this data. The tool's recommendation — front-door, an instrument, or an experiment — is exactly what Step 6b proposes.
 
 **In plain terms:** We want to know whether being in the mentorship program actually causes promotions, not just whether mentored people get promoted more often. The 2x rate could look this way because mentors pick exactly the ambitious, visible, well-connected people who were going to be promoted anyway — the way a falling barometer predicts a storm without causing it. To call mentorship a cause, we'd have to compare like with like by accounting for ambition and political savvy, which we can't do with this data, because those traits were never recorded. That's why the only credible answer comes from a lottery.
 
-## Step 8b: Experiment
+## Step 6b: Experiment
 
 The observational estimate is not credible. To identify the causal effect of mentorship:
 

@@ -24,11 +24,13 @@ Notification (T) → Retention (Y)
 
 Engagement is a confounder — it causes both treatment assignment and outcome.
 
-Running this DAG through `dag_check.py` confirms the structure mechanically. The spec:
+Emit the DAG as a spec for `dag_check.py`:
 
 ```json
 {"edges":[["Engagement","Notification"],["Engagement","Retention"],["Notification","Retention"]],"treatment":"Notification","outcome":"Retention","adjustment_set":["Engagement"]}
 ```
+
+## Step 5: Run the Identifiability Check
 
 ```bash
 echo '{"edges":[["Engagement","Notification"],["Engagement","Retention"],["Notification","Retention"]],"treatment":"Notification","outcome":"Retention","adjustment_set":["Engagement"]}' | python3 systems-analysis/skills/causal-analysis/dag_check.py
@@ -50,27 +52,15 @@ Node classification:
   Engagement: confounder candidate
 ```
 
-The tool agrees: one backdoor path, blocked by conditioning on Engagement, which it classifies as a confounder candidate. This is only as good as the assumption that Engagement is measured well enough to block the path — see Step 7.
+The tool does the graph work that used to be three manual steps: one backdoor path (Notification ← Engagement → Retention), no colliders in the adjustment set, and `{Engagement}` blocks the path. It classifies Engagement as a confounder candidate. **Confidence note:** this is only as good as the assumption that Engagement is measured well enough to block the path. It's a crude binary (opened app or not); if engagement has unmeasured dimensions (e.g., session depth, feature usage) that affect both notification targeting and retention, the adjustment is incomplete.
 
 **In plain terms:** We want to know whether sending push notifications actually keeps users around, not just whether the two show up together. Right now the numbers could look this way because users who were already engaged — already opening the app — both get targeted with notifications and stick around anyway, the way a falling barometer predicts a storm without causing it. To call notifications a cause, we'd have to compare like with like by accounting for baseline engagement, which we can only partly do here, because our engagement measure is a crude binary that may miss the dimensions that matter.
 
-## Step 5: Backdoor Paths
-
-T ← C → Y. One open backdoor path through Engagement.
-
-## Step 6: Collider Check
-
-No colliders in the proposed adjustment set.
-
-## Step 7: Adjustment Set
-
-{Engagement} blocks the backdoor path. But engagement is measured crudely (binary: opened app or not). **Confidence note:** if engagement has unmeasured dimensions (e.g., session depth, feature usage) that affect both notification targeting and retention, the adjustment is incomplete.
-
-## Step 8b: Experiment
+## Step 6b: Experiment
 
 Adjustment set may be insufficient — unmeasured engagement dimensions. Recommend a randomized holdout: randomly withhold notifications from 10% of eligible users for 30 days.
 
-## Step 9: Threats
+## Step 7: Threats
 
 - **Unmeasured confounders:** Engagement granularity beyond binary open/not-open
 - **SUTVA:** Users may discuss notifications socially, contaminating control group
