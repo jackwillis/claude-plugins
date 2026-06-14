@@ -38,4 +38,35 @@ To estimate the effect of Degree on Job Performance, you need one of:
 2. **A hiring period where degrees were ignored** — natural experiment removing one arrow into the collider
 3. **An entirely different study design** that doesn't select on hiring outcome
 
+Running the DAG through `dag_check.py`, with the (wrong) proposed adjustment set `["Hired"]` that the employee-only data implicitly forces, makes the failure explicit:
+
+```json
+{"edges":[["DegreePrestige","Hired"],["InterviewPerformance","Hired"],["DegreePrestige","JobPerformance"],["InterviewPerformance","JobPerformance"]],"treatment":"DegreePrestige","outcome":"JobPerformance","adjustment_set":["Hired"]}
+```
+
+```bash
+echo '{"edges":[["DegreePrestige","Hired"],["InterviewPerformance","Hired"],["DegreePrestige","JobPerformance"],["InterviewPerformance","JobPerformance"]],"treatment":"DegreePrestige","outcome":"JobPerformance","adjustment_set":["Hired"]}' | python3 systems-analysis/skills/causal-analysis/dag_check.py
+```
+
+```
+Treatment: DegreePrestige    Outcome: JobPerformance
+Observed: ['DegreePrestige', 'Hired', 'InterviewPerformance', 'JobPerformance']
+Unobserved: none
+
+Backdoor paths (open paths confound the estimate):
+  none
+
+Adjustment set: {} (identifiable; no adjustment needed)
+
+Proposed adjustment set ['Hired']: INVALID - contains descendants of treatment: ['Hired']
+
+Node classification:
+  Hired: descendant-of-treatment (do not adjust), collider-ish (>=2 parents)
+  InterviewPerformance: other
+```
+
+The tool flags `Hired` as both a descendant of the treatment and a collider (two parents), and rejects conditioning on it. Note what the report does *not* model: it analyzes the graph as drawn, where no backdoor path exists and the effect is identifiable with the empty set. The bias here doesn't come from an open backdoor path the tool can see — it comes from the dataset *itself* being pre-filtered to `Hired = 1`, which the JSON spec can't express. The tool tells you not to adjust for the collider; it cannot tell you that you have already selected on it.
+
+**In plain terms:** We want to know whether a prestigious degree actually makes someone perform better on the job, not just whether the two show up together among people we hired. The "no correlation" finding is an artifact: we only ever see people who cleared the hiring bar, and conditioning on being hired is like judging dating partners you've only met because they were attractive or kind — it manufactures a correlation (here, a negative one between degree and interview performance) that isn't really there. To call degree a cause, we'd have to compare like with like across everyone who applied, which we can't do with employee-only data.
+
 **Key takeaway:** "No correlation among employees" does not mean "no effect." The null finding is exactly what collider bias predicts, even if prestigious degrees genuinely improve performance.

@@ -24,6 +24,36 @@ Notification (T) → Retention (Y)
 
 Engagement is a confounder — it causes both treatment assignment and outcome.
 
+Running this DAG through `dag_check.py` confirms the structure mechanically. The spec:
+
+```json
+{"edges":[["Engagement","Notification"],["Engagement","Retention"],["Notification","Retention"]],"treatment":"Notification","outcome":"Retention","adjustment_set":["Engagement"]}
+```
+
+```bash
+echo '{"edges":[["Engagement","Notification"],["Engagement","Retention"],["Notification","Retention"]],"treatment":"Notification","outcome":"Retention","adjustment_set":["Engagement"]}' | python3 systems-analysis/skills/causal-analysis/dag_check.py
+```
+
+```
+Treatment: Notification    Outcome: Retention
+Observed: ['Engagement', 'Notification', 'Retention']
+Unobserved: none
+
+Backdoor paths (open paths confound the estimate):
+  [BLOCKED] Notification - Engagement - Retention
+
+Adjustment set: ['Engagement'] (condition on these to identify the effect)
+
+Proposed adjustment set ['Engagement']: VALID - blocks all backdoor paths without opening a collider
+
+Node classification:
+  Engagement: confounder candidate
+```
+
+The tool agrees: one backdoor path, blocked by conditioning on Engagement, which it classifies as a confounder candidate. This is only as good as the assumption that Engagement is measured well enough to block the path — see Step 7.
+
+**In plain terms:** We want to know whether sending push notifications actually keeps users around, not just whether the two show up together. Right now the numbers could look this way because users who were already engaged — already opening the app — both get targeted with notifications and stick around anyway, the way a falling barometer predicts a storm without causing it. To call notifications a cause, we'd have to compare like with like by accounting for baseline engagement, which we can only partly do here, because our engagement measure is a crude binary that may miss the dimensions that matter.
+
 ## Step 5: Backdoor Paths
 
 T ← C → Y. One open backdoor path through Engagement.

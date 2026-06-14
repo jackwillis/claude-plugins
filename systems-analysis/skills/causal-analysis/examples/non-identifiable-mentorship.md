@@ -38,6 +38,34 @@ The only variable that blocks the backdoor path is U, which is unmeasured. No ob
 
 Controlling for observable proxies (job title, tenure, performance ratings) does not solve the problem unless they fully mediate U's effect on both T and Y — and "ambition" and "political savvy" are precisely the things HR data doesn't capture.
 
+Marking the confounder as `unobserved` and running `dag_check.py` confirms there is no observable adjustment set:
+
+```json
+{"edges":[["AmbitionVisibility","Mentorship"],["AmbitionVisibility","Promotion"],["Mentorship","Promotion"]],"treatment":"Mentorship","outcome":"Promotion","unobserved":["AmbitionVisibility"]}
+```
+
+```bash
+echo '{"edges":[["AmbitionVisibility","Mentorship"],["AmbitionVisibility","Promotion"],["Mentorship","Promotion"]],"treatment":"Mentorship","outcome":"Promotion","unobserved":["AmbitionVisibility"]}' | python3 systems-analysis/skills/causal-analysis/dag_check.py
+```
+
+```
+Treatment: Mentorship    Outcome: Promotion
+Observed: ['Mentorship', 'Promotion']
+Unobserved: ['AmbitionVisibility']
+
+Backdoor paths (open paths confound the estimate):
+  [OPEN] Mentorship - AmbitionVisibility - Promotion
+
+Adjustment set: NOT identifiable by backdoor adjustment from observed variables (an unmeasured confounder blocks it). Consider front-door or an instrument, or an experiment.
+
+Node classification:
+  AmbitionVisibility: confounder candidate
+```
+
+The path through Ambition/Visibility stays OPEN, and because that node is unobserved, no adjustment set can close it. The tool's recommendation — front-door, an instrument, or an experiment — is exactly what Step 8b proposes.
+
+**In plain terms:** We want to know whether being in the mentorship program actually causes promotions, not just whether mentored people get promoted more often. The 2x rate could look this way because mentors pick exactly the ambitious, visible, well-connected people who were going to be promoted anyway — the way a falling barometer predicts a storm without causing it. To call mentorship a cause, we'd have to compare like with like by accounting for ambition and political savvy, which we can't do with this data, because those traits were never recorded. That's why the only credible answer comes from a lottery.
+
 ## Step 8b: Experiment
 
 The observational estimate is not credible. To identify the causal effect of mentorship:
