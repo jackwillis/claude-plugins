@@ -366,7 +366,12 @@ def analyze(spec):
     T, Y = spec["treatment"], spec["outcome"]
     missing = {T, Y} - G.nodes
     if missing:
-        return {"error": f"treatment/outcome not in graph: {sorted(missing)}"}
+        return {"error": f"treatment/outcome not in graph: {sorted(missing, key=str)}"}
+    if T == Y:
+        return {"error": "treatment and outcome must be distinct nodes"}
+    ghost = spec["unobserved"] - G.nodes
+    if ghost:
+        return {"error": f"unobserved nodes not in graph: {sorted(ghost, key=str)}"}
     observed = G.nodes - spec["unobserved"]
     paths = backdoor_paths(G, T, Y)
     adj = find_adjustment_set(G, T, Y, observed)
@@ -388,8 +393,8 @@ def format_report(spec, result):
     T, Y = spec["treatment"], spec["outcome"]
     G = result["graph"]
     lines = [f"Treatment: {T}    Outcome: {Y}",
-             f"Observed: {sorted(result['observed'])}",
-             f"Unobserved: {sorted(spec['unobserved']) or 'none'}",
+             f"Observed: {sorted(result['observed'], key=str)}",
+             f"Unobserved: {sorted(spec['unobserved'], key=str) or 'none'}",
              ""]
 
     lines.append("Backdoor paths (open paths confound the estimate):")
@@ -410,14 +415,14 @@ def format_report(spec, result):
     elif adj == set():
         lines.append("Adjustment set: {} (identifiable; no adjustment needed)")
     else:
-        lines.append(f"Adjustment set: {sorted(adj)} "
+        lines.append(f"Adjustment set: {sorted(adj, key=str)} "
                      "(condition on these to identify the effect)")
     lines.append("")
 
     if "proposed" in result:
         ok, reason = result["proposed"]
         verdict = "VALID" if ok else "INVALID"
-        lines.append(f"Proposed adjustment set {sorted(spec['adjustment_set'])}: "
+        lines.append(f"Proposed adjustment set {sorted(spec['adjustment_set'], key=str)}: "
                      f"{verdict} - {reason}")
         lines.append("")
 
@@ -514,6 +519,15 @@ def run_selftest():
     _check("report flags unobserved adj infeasible", "not identifiable" in report.lower(), True)
     _check("report names the proposed set", "Engagement" in report, True)
 
+    # Task 4 (review fixes): input-validation error branches.
+    _check("cycle error", "error" in analyze(read_spec(json.dumps(
+        {"edges": [["A", "B"], ["B", "A"]], "treatment": "A", "outcome": "B"}))), True)
+    _check("ghost unobserved error", "error" in analyze(read_spec(json.dumps(
+        {"edges": [["A", "B"]], "treatment": "A", "outcome": "B",
+         "unobserved": ["GHOST"]}))), True)
+    _check("self T==Y error", "error" in analyze(read_spec(json.dumps(
+        {"edges": [["A", "B"]], "treatment": "A", "outcome": "A"}))), True)
+
     print("ALL SELFTESTS PASSED")
 
 
@@ -521,7 +535,15 @@ def main(argv):
     if "--selftest" in argv:
         run_selftest()
         return
-    spec = read_spec(sys.stdin.read())
+    text = sys.stdin.read()
+    if not text.strip():
+        print("ERROR: no input on stdin", file=sys.stderr)
+        sys.exit(1)
+    try:
+        spec = read_spec(text)
+    except (ValueError, KeyError) as e:
+        print(f"ERROR: invalid spec: {e}", file=sys.stderr)
+        sys.exit(1)
     print(format_report(spec, analyze(spec)))
 
 
