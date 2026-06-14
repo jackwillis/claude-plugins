@@ -41,6 +41,8 @@ With ~10 test cases x 2 conditions x 2 models (Claude + GPT), that's ~40 API cal
 | Rung demotion (code review) | "PRs with comments have fewer incidents, mandate comments" | Rung 1 association, complexity confounds both |
 | Mediator adjustment | Controlling for a variable on the causal path | Should exclude mediators from adjustment set |
 
+The skill now offloads the graph reasoning (backdoor paths, adjustment set, node classification) to a bundled `dag_check.py`, so part of the verification is deterministic rather than prompt-dependent. The script ships an in-file `--selftest` (`python3 dag_check.py --selftest`); its d-separation vectors are adapted from networkx 3.6.1's own `test_d_separation.py` suite, anchoring the math to an established reference rather than to the rubric above. The table still measures what the model does upstream of the script: locating the rung, drawing the right DAG, stating the estimand.
+
 ### representing-and-intervening
 
 | Test Case | Planted Error | Correct Answer |

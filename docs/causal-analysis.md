@@ -28,7 +28,11 @@ For simple causal structures, it states the estimand and the main threat in a se
 
 Rather than reasoning about d-separation, backdoor paths, and adjustment sets by hand, the skill emits the DAG as a JSON spec and runs a bundled solver, `dag_check.py`, to compute them. The script reports the backdoor paths (each marked open or blocked), a valid adjustment set or a verdict that the effect is not identifiable, and a classification of each node as confounder, mediator, descendant, or collider.
 
-The script is pure standard-library Python — no install or dependencies needed. After reading off the result, the skill appends a plain-language explanation so the conclusion is legible to readers who don't know the graph terminology.
+The script is pure standard-library Python — no install or dependencies needed. Its d-separation routines are vendored from networkx, and it carries an in-file `--selftest` (`python3 dag_check.py --selftest`). If `python3` isn't available, the skill falls back to tracing backdoor paths by the manual rules in its appendix.
+
+The script only decides identifiability by backdoor adjustment. It does not implement front-door or instrumental-variable estimation; when no adjustment set exists it reports the effect as not identifiable and leaves those alternatives to the analyst.
+
+After reading off the result, the skill appends a plain-language explanation (the falling-barometer analogy: a barometer predicts a storm without causing it) so the conclusion is legible to readers who don't know the graph terminology.
 
 ## Examples
 
