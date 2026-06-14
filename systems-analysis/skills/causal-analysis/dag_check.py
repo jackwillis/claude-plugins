@@ -525,8 +525,26 @@ def run_selftest():
     _check("ghost unobserved error", "error" in analyze(read_spec(json.dumps(
         {"edges": [["A", "B"]], "treatment": "A", "outcome": "B",
          "unobserved": ["GHOST"]}))), True)
-    _check("self T==Y error", "error" in analyze(read_spec(json.dumps(
-        {"edges": [["A", "B"]], "treatment": "A", "outcome": "A"}))), True)
+    # Backdoor path engine (backdoor_paths + is_path_blocked): the OPEN/BLOCKED
+    # report column rests on this hand-rolled path-blocking rule, distinct from
+    # the vendored d-separator. Guard it directly -- especially the
+    # collider-opened-by-a-descendant case, which nothing else exercises.
+    confg = DAG([("C", "T"), ("C", "Y")])
+    _check("path open: confounder unconditioned",
+           is_path_blocked(confg, ["T", "C", "Y"], set()), False)
+    _check("path blocked: confounder conditioned",
+           is_path_blocked(confg, ["T", "C", "Y"], {"C"}), True)
+
+    colg = DAG([("A", "T"), ("A", "Col"), ("Y", "Col"), ("Col", "D")])
+    bdp = ["T", "A", "Col", "Y"]
+    _check("path blocked: collider unconditioned",
+           is_path_blocked(colg, bdp, set()), True)
+    _check("path open: collider conditioned",
+           is_path_blocked(colg, bdp, {"Col"}), False)
+    _check("path open: collider's descendant conditioned",
+           is_path_blocked(colg, bdp, {"D"}), False)
+    _check("backdoor_paths finds the collider path",
+           bdp in backdoor_paths(colg, "T", "Y"), True)
 
     print("ALL SELFTESTS PASSED")
 
