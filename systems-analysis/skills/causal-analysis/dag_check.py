@@ -344,6 +344,90 @@ def is_path_blocked(G, path, Z):
 
 
 # ---------------------------------------------------------------------------
+# JSON spec -> analysis -> text report.
+# ---------------------------------------------------------------------------
+
+def read_spec(text):
+    raw = json.loads(text)
+    proposed = raw.get("adjustment_set", None)
+    return {
+        "edges": [tuple(e) for e in raw["edges"]],
+        "treatment": raw["treatment"],
+        "outcome": raw["outcome"],
+        "unobserved": set(raw.get("unobserved", [])),
+        "adjustment_set": set(proposed) if proposed is not None else None,
+    }
+
+
+def analyze(spec):
+    G = DAG(spec["edges"])
+    if not is_directed_acyclic_graph(G):
+        return {"error": "graph contains a cycle; a DAG is required"}
+    T, Y = spec["treatment"], spec["outcome"]
+    missing = {T, Y} - G.nodes
+    if missing:
+        return {"error": f"treatment/outcome not in graph: {sorted(missing)}"}
+    observed = G.nodes - spec["unobserved"]
+    paths = backdoor_paths(G, T, Y)
+    adj = find_adjustment_set(G, T, Y, observed)
+    result = {
+        "observed": observed,
+        "paths": paths,
+        "adjustment_set": adj,
+        "classification": classify_nodes(G, T, Y),
+        "graph": G,
+    }
+    if spec["adjustment_set"] is not None:
+        result["proposed"] = validate_adjustment_set(G, T, Y, spec["adjustment_set"])
+    return result
+
+
+def format_report(spec, result):
+    if "error" in result:
+        return f"ERROR: {result['error']}"
+    T, Y = spec["treatment"], spec["outcome"]
+    G = result["graph"]
+    lines = [f"Treatment: {T}    Outcome: {Y}",
+             f"Observed: {sorted(result['observed'])}",
+             f"Unobserved: {sorted(spec['unobserved']) or 'none'}",
+             ""]
+
+    lines.append("Backdoor paths (open paths confound the estimate):")
+    if not result["paths"]:
+        lines.append("  none")
+    else:
+        z = result["adjustment_set"] if result["adjustment_set"] is not None else set()
+        for path in result["paths"]:
+            status = "BLOCKED" if is_path_blocked(G, path, z) else "OPEN"
+            lines.append(f"  [{status}] " + " - ".join(str(p) for p in path))
+    lines.append("")
+
+    adj = result["adjustment_set"]
+    if adj is None:
+        lines.append("Adjustment set: NOT identifiable by backdoor adjustment from "
+                     "observed variables (an unmeasured confounder blocks it). "
+                     "Consider front-door or an instrument, or an experiment.")
+    elif adj == set():
+        lines.append("Adjustment set: {} (identifiable; no adjustment needed)")
+    else:
+        lines.append(f"Adjustment set: {sorted(adj)} "
+                     "(condition on these to identify the effect)")
+    lines.append("")
+
+    if "proposed" in result:
+        ok, reason = result["proposed"]
+        verdict = "VALID" if ok else "INVALID"
+        lines.append(f"Proposed adjustment set {sorted(spec['adjustment_set'])}: "
+                     f"{verdict} - {reason}")
+        lines.append("")
+
+    lines.append("Node classification:")
+    for n in sorted(result["classification"], key=str):
+        lines.append(f"  {n}: {', '.join(result['classification'][n])}")
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
 # Selftest harness (vectors added across tasks).
 # ---------------------------------------------------------------------------
 
@@ -419,6 +503,17 @@ def run_selftest():
     _check("classify mediator",
            "mediator" in classify_nodes(frontdoor, "T", "Y")["M"], True)
 
+    # Task 4: stdin spec -> report (string assertions on the confounder case).
+    spec = read_spec(json.dumps({
+        "edges": [["Engagement", "Notif"], ["Engagement", "Retention"],
+                  ["Notif", "Retention"]],
+        "treatment": "Notif", "outcome": "Retention",
+        "unobserved": ["Engagement"], "adjustment_set": ["Engagement"],
+    }))
+    report = format_report(spec, analyze(spec))
+    _check("report flags unobserved adj infeasible", "not identifiable" in report.lower(), True)
+    _check("report names the proposed set", "Engagement" in report, True)
+
     print("ALL SELFTESTS PASSED")
 
 
@@ -426,8 +521,8 @@ def main(argv):
     if "--selftest" in argv:
         run_selftest()
         return
-    print("not yet implemented", file=sys.stderr)
-    sys.exit(2)
+    spec = read_spec(sys.stdin.read())
+    print(format_report(spec, analyze(spec)))
 
 
 if __name__ == "__main__":
