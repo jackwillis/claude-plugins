@@ -1,0 +1,16 @@
+{
+  "name": "research-lab",
+  "version": "0.1.0",
+  "description": "Experimental design and evidence review skill prototypes; not yet marketplace-listed or evaluated.",
+  "author": {
+    "name": "Jack Willis"
+  },
+  "license": "MIT",
+  "keywords": [
+    "experiments",
+    "research",
+    "evidence",
+    "causal-inference",
+    "reproducibility"
+  ]
+}
