@@ -25,6 +25,19 @@ Use the existing [paired skill evaluation method](evaluation.md). Assign each te
 
 These are *evaluation categories*, not evidence that the skills work. Use withheld prompt wording, including at least one adversarial ambiguity per skill.
 
+### Additional withheld challenge categories (PE-AA-01 peer review, November 18)
+
+An independent research session found a serious planning failure in a carefully controlled antialiasing study: a final convergence requirement was much tighter than the candidate-blind numerical preflight, and the expensive geographic references did not converge. This is a failure of **instrument feasibility**, not evidence against the renderer.
+
+Before any new skill revision is tested, reserve at least two fresh, unexposed challenge scenarios **outside the skill prompt and public answer-key materials**:
+
+- **Instrument-limited scored study:** pristine provenance and independent review, but an approximate reference cannot meet the original frozen decision precision and resource ceiling. The review must preserve failed/partial outcomes, avoid a candidate verdict from nonconvergence, reject post-hoc threshold relaxation and avoid selection of successful fixtures.
+- **Disproportionate research ceremony:** the uncertainty is narrow and a cheap analytical or deterministic test suffices. The design should not add a large causal/statistical apparatus merely to look rigorous.
+
+Construct new fictional details rather than recycling PE-AA-01's exact numbers; keep prompt wording and rubric inaccessible to responding agents, but preserve them for the independent reviewer. **The descriptions above are evaluation-design intent, not withheld test items.** A responder who has read this public file should not be used for the blind treatment/control runs.
+
+Test both skills where relevant, record per-case decisions and unnecessary-ceremony penalties, and report results separately from the original eight cases. The evaluations have not yet been executed.
+
 ## Scoring and stopping
 
 For each item, grade blindly where possible on three binary criteria: identifies the planted flaw, offers a valid bounded next action, and avoids a false certainty/overclaim. Record unnecessary ceremony as a fourth binary penalty. Run at least eight cases × two conditions × two model families if accessible; otherwise report the smaller study rather than extrapolating. Review individual failures, not just aggregate scores. No promotion threshold is preselected yet; choose it before inspecting treatment results.
