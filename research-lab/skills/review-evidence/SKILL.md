@@ -14,15 +14,17 @@ For a low-stakes deterministic invariant with an independently checked oracle an
 ## Review procedure
 
 1. **Recover the question:** Locate the original protocol and intended decision. Identify the predeclared outcome, comparator, thresholds, guardrails and stop rule.
-2. **Validate observations:** Inspect raw rows including missing and failed trials, source/fixture hashes, exact revision, environment, commands and analysis. Re-run a deterministic check if available. If raw data or a preregistered protocol is absent, say so.
-3. **Check study design:** Match experimental units to randomization or sampling; flag correlated repeats masquerading as independent replicates, confounders, order/carryover effects, measurement changes and selective exclusion of failures.
-4. **Compare prediction with observation:** Report meaningful effect sizes, dispersion/uncertainty when justified, negative cases, and guardrail failures. Distinguish a controlled causal comparison from observational correlation and a synthetic contract check from real-world accuracy.
-5. **Challenge the inference:** Try a plausible alternative explanation or counterexample. Identify whether the report generalizes beyond the tested inputs, platform, population or hardware.
-6. **Make a bounded recommendation:** *adopt*, *reject*, *revise and repeat*, *defer* or *insufficient evidence*, stating the exact reason and cheapest next test if needed. Preserve negative findings.
-7. **Respect ownership:** Research results never authorize a merge, source/license approval, owner-hardware access, release scope or new implementation on their own.
+2. **Validate observations:** Inspect raw rows including missing, failed, partially completed and nonconvergent trials, source/fixture hashes, exact revision, environment, commands and analysis. Re-run a deterministic check if available. If raw data or a preregistered protocol is absent, say so.
+3. **Check the instrument before scoring:** For expensive or approximate references, inspect whether a candidate-blind feasibility preflight demonstrated the **final** required precision, coverage, resource ceilings and independent accuracy controls. A permissive preflight is not proof of feasibility at a later stricter threshold. Distinguish *successive estimates agreeing* from a validated bound on error relative to the intended reference.
+4. **Check study design:** Match experimental units to randomization or sampling; flag correlated repeats masquerading as independent replicates, confounders, order/carryover effects, measurement changes and selective exclusion of failures.
+5. **Classify validity before conclusions:** Report (a) valid evidence supporting or refuting the hypothesis, (b) valid but insufficient evidence, (c) instrument-limited findings such as reference nonconvergence, or (d) protocol-invalid findings such as failed admission or unapproved post-hoc threshold changes. Cases (c) and (d) **do not refute the candidate**. Do not score a convenient successful subset as the full population; preserve missingness and partial histories.
+6. **Compare prediction with valid observation:** Where the protocol and instrument permit it, report meaningful effect sizes, dispersion/uncertainty when justified, negative cases and guardrail failures. Distinguish controlled causal comparisons from observational correlation and a synthetic contract check from real-world accuracy.
+7. **Challenge the inference:** Try a plausible alternative explanation or counterexample. Identify whether the report generalizes beyond the tested inputs, platform, population or hardware. Ask whether a cheaper analytical/deterministic check could answer the outstanding question.
+8. **Make a bounded recommendation:** *adopt*, *reject*, *revise and repeat*, *defer* or *insufficient evidence*, stating the exact reason and cheapest next test if needed. Keep the evidence-validity classification distinct from the product decision. If the measurement instrument fails, recommend instrument diagnosis or a separately authorized new protocol, not after-the-fact relaxation of the existing freeze.
+9. **Respect ownership:** Research results never authorize a merge, source/license approval, owner-hardware access, release scope or new implementation on their own.
 
 ## Output
 
-Separate **observed**, **inferred**, **uncertain**, and **decision requested**. Provide links or exact reproduction commands. Don't conceal a missing protocol or revise its success metric retroactively.
+Separate **observed**, **evidence-validity classification**, **inferred**, **uncertain**, and **decision requested**. Provide links or exact reproduction commands. Don't conceal a missing protocol, an instrument feasibility failure, or revise its success metric retroactively.
 
 **Transition:** If evidence contradicts the causal model, return to *representing-and-intervening*; if test guards are weak, use *is-it-tested* or *what-to-test*.
