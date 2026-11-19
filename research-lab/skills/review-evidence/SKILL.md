@@ -11,6 +11,12 @@ Decide what the evidence supports, not what a persuasive summary implies.
 
 For a low-stakes deterministic invariant with an independently checked oracle and exact reproduction, a brief result and limitation statement is sufficient. Do not invent uncertainty calculations.
 
+## Minimum sufficient conclusion
+
+Check whether six obligations are met in proportion to the claim: target, instrument validity, consequential controls, propagated uncertainty, frozen PASS/FAIL/INCONCLUSIVE semantics, and evidence provenance. Classify safeguards as **core obligations**, **conditional controls** addressing demonstrated risk, or **discovery tools** that need not be repeated. Do not elevate a successful exploratory check into an unapproved acceptance criterion.
+
+**Stop when sufficient:** If a valid measurement and its decision-level uncertainty already resolve the frozen decision, recommend concluding the investigation, not automatically increasing precision or commissioning another review. Additional work must name a consequential open failure mode and explain why resolving it could change the decision. A well-supported narrow conclusion is preferable to endless certification.
+
 ## Review procedure
 
 1. **Recover the question:** Locate the original protocol and intended decision. Identify the predeclared outcome, comparator, thresholds, guardrails and stop rule.
