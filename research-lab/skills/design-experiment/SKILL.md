@@ -15,6 +15,12 @@ If a reversible, low-cost choice is primarily aesthetic or preference-based, say
 
 Before adding an independent oracle, replicate suite, statistical method, or review stage, identify the concrete failure it protects against, whether a cheaper check would catch that failure, and when to stop. Use a deterministic assertion for a deterministic contract. A multi-stage numerical comparison may need substantial instrument validation; a reversible UI detail may not need an experiment.
 
+## Evidence obligations versus optional machinery
+
+For a consequential result, secure six obligations proportionately: a defined target, justified instrument validity, consequential defect-detection controls, decision-level uncertainty, frozen PASS/FAIL/INCONCLUSIVE semantics, and reproducible provenance. **Do not** confuse these with mandatory tools. Exact-rational methods, mutation campaigns, bootstrap analysis, checkpoint ledgers and multiple peer reviews are **conditional** on named risks. Broad exploratory matrices and prototype comparisons are **discovery tools**, not permanent requirements.
+
+**Stop investigating** once the validity argument, relevant uncertainty and decision rule already support the particular decision. Additional research must address a specific unresolved failure mode with a credible chance of changing the outcome. Preserve justified controls, not every step used to discover them.
+
 ## Protocol
 
 1. **Decision and alternatives:** Name the decision, the no-change alternative, and two plausible competing explanations when appropriate. If the mechanism is unclear, use *representing-and-intervening*. For observational causal claims, use *causal-analysis* first.
