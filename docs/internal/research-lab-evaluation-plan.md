@@ -36,6 +36,15 @@ Before any new skill revision is tested, reserve at least two fresh, unexposed c
 
 Construct new fictional details rather than recycling PE-AA-01's exact numbers; keep prompt wording and rubric inaccessible to responding agents, but preserve them for the independent reviewer. **The descriptions above are evaluation-design intent, not withheld test items.** A responder who has read this public file should not be used for the blind treatment/control runs.
 
+### Later withheld challenge categories (certified-reference follow-up, November 18)
+
+The subsequent PE-AA-01 peer report adds two distinct reasoning challenges that go beyond detecting a failed reference:
+
+- **Valid vs. precise vs. decision-resolved:** A mathematically certified interval can be wider than an operational precision target but still settle a large-effect threshold; a narrow interval may straddle the threshold. The skills should not conflate validity, precision and decision resolution or silently replace the scientific estimand during instrument repair.
+- **Coupled numerical uncertainty in the actual metric domain:** A and B share an uncertain reference; numerical error is correlated, quantization may be discrete, and the quality metric is measured within a declared mask rather than the full image. The reviewer should not manufacture independent noise, use a whole-frame surrogate, or expect bootstrap resampling to cure common-reference uncertainty.
+
+Prepare *new fictional*, independently scored holdouts distinct from the real PE-AA-01 report. Keep exact prompts, oracle computations and scoring keys concealed from responding agents. Record source of these ideas only in this evaluation plan. Do not evaluate agents already exposed to the case as blind controls. These evaluation categories do **not** constitute claims of tool effectiveness.
+
 Test both skills where relevant, record per-case decisions and unnecessary-ceremony penalties, and report results separately from the original eight cases. The evaluations have not yet been executed.
 
 ## Scoring and stopping
