@@ -47,6 +47,10 @@ Prepare *new fictional*, independently scored holdouts distinct from the real PE
 
 Test both skills where relevant, record per-case decisions and unnecessary-ceremony penalties, and report results separately from the original eight cases. The evaluations have not yet been executed.
 
+### Withheld proportionality and stopping challenges (from minimum-contract peer review)
+
+Add fresh fictional held-out tests, not exposed with their expected answers, to assess whether models (1) distinguish a **core evidence obligation** from a **conditional control** and a **historical discovery tool**, (2) reject an apparently conservative added rule that silently changes a frozen acceptance criterion, and (3) explicitly **stop investigating** when a sufficient validity argument and decision-level bounds already resolve the question. Avoid giving the respondent PE-AA-01's actual numbers or the published rubric. Evaluate baseline and treatment on identical unseen prompts; never claim the skill works before those comparisons.
+
 ## Scoring and stopping
 
 For each item, grade blindly where possible on three binary criteria: identifies the planted flaw, offers a valid bounded next action, and avoids a false certainty/overclaim. Record unnecessary ceremony as a fourth binary penalty. Run at least eight cases × two conditions × two model families if accessible; otherwise report the smaller study rather than extrapolating. Review individual failures, not just aggregate scores. No promotion threshold is preselected yet; choose it before inspecting treatment results.
