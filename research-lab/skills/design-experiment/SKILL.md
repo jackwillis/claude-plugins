@@ -1,0 +1,41 @@
+---
+name: design-experiment
+description: Use when designing a measurable comparison among alternatives, evaluating an A/B test or benchmark plan, or identifying the cheapest observation that would decide an uncertain product or engineering choice.
+---
+
+# Design Experiment — provisional, pending independent evaluation
+
+Design the **cheapest discriminating test** rather than the most elaborate study. The aim is **decision quality per unit of investigative effort**, not maximum procedural rigor.
+
+## Fast exit
+
+If a reversible, low-cost choice is primarily aesthetic or preference-based, say so and propose a direct choice. Do not manufacture an experiment. If a deterministic input/output assertion is sufficient, write that instead of a causal study.
+
+## Proportionality gate
+
+Before adding an independent oracle, replicate suite, statistical method, or review stage, identify the concrete failure it protects against, whether a cheaper check would catch that failure, and when to stop. Use a deterministic assertion for a deterministic contract. A multi-stage numerical comparison may need substantial instrument validation; a reversible UI detail may not need an experiment.
+
+## Evidence obligations versus optional machinery
+
+For a consequential result, secure six obligations proportionately: a defined target, justified instrument validity, consequential defect-detection controls, decision-level uncertainty, frozen PASS/FAIL/INCONCLUSIVE semantics, and reproducible provenance. **Do not** confuse these with mandatory tools. Exact-rational methods, mutation campaigns, bootstrap analysis, checkpoint ledgers and multiple peer reviews are **conditional** on named risks. Broad exploratory matrices and prototype comparisons are **discovery tools**, not permanent requirements.
+
+**Stop investigating** once the validity argument, relevant uncertainty and decision rule already support the particular decision. Additional research must address a specific unresolved failure mode with a credible chance of changing the outcome. Preserve justified controls, not every step used to discover them.
+
+## Protocol
+
+1. **Decision and alternatives:** Name the decision, the no-change alternative, and two plausible competing explanations when appropriate. If the mechanism is unclear, use *representing-and-intervening*. For observational causal claims, use *causal-analysis* first.
+2. **Target quantity:** State the primary outcome and measurement unit, and if asking about an intervention, the treatment, comparator, estimand, population and actual unit of assignment. A repeated frame on one G4 is not a new computer or new user.
+3. **Distinguishing prediction:** Write what each model predicts and at least one result that would overturn the preferred model, **before** any measurements.
+4. **Controls:** State fixed conditions, varied factors, randomization or blocking when useful, manipulations to verify, interactions of interest, known confounders, likely measurement error and spillovers.
+5. **Instrument-feasibility gate (when needed):** Before freezing an expensive study that uses an approximate reference, test the *instrument* candidate-blind on representative inputs, analytic controls or independent checks. Verify the reference's **mathematical validity**, feasibility at the intended decision margin, actual metric domain or mask, and resource/sample ceiling. Keep **VALID** (sound enclosure), **PRECISE** (operational target reached), and **DECISION-RESOLVED** (uncertainty permits a threshold conclusion) separate. An enclosure wider than the target can still be decision-resolving for a large effect; precision alone need not resolve a borderline case. Avoid inspecting candidate results during feasibility work. If the reference is untrustworthy or infeasible, redesign or report the limitation before scored work. Skip elaborate preflights for a simple deterministic oracle.
+6. **Decision and stopping:** Specify meaningful decision margins and reference uncertainty, admission and guardrail failures, numerical quantization and coupled shared-reference behavior where applicable, treatment of missing/failed/nonconvergent trials, sample or domain bounds and stop rules. Keep the estimand and evaluation mask fixed across instrument revisions. Freeze before scored results; never retroactively relax the criterion, select a convenient successful subset or reclassify instrument failures as candidate defects.
+7. **Evidence plan:** Name reproducible inputs, source/license review, commit, build, exact commands, machine and OS, hashes, raw observations including failures, and independent oracle or falsification check.
+8. **Scope:** List what the results cannot establish. No research plan authorizes new data sources, code changes, G4 access, merge, release or milestone changes in a governed repository.
+
+## Output
+
+Return a short research contract: decision; alternatives; hypothesis and falsifier; experimental unit; method; instrument validity/feasibility (or why not required); primary outcome and its domain; guardrails; decision rule; stop rule; reproducibility; limitations and owner boundary.
+
+Do not fabricate data. Do not require a causal DAG for a parser invariant, or statistical inference for a small exploratory UX observation.
+
+**Transition:** Once raw results exist, use *review-evidence*. Before implementation changes, use *propagation-trace* if a shared contract changes.

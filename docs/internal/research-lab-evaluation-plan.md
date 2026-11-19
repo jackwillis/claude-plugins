@@ -1,0 +1,60 @@
+# Research Lab skill evaluation — proposal (not yet executed)
+
+Status: draft, November 17, 2026. These two skills are **prototypes**, not marketplace-listed. Do not claim they improve research quality until tested.
+
+## Hypothesis
+
+Relative to a model answering the same question without a loaded skill, `design-experiment` and `review-evidence` improve detection of specific known experimental-design and inference errors, without imposing unnecessary ceremony on simple cases.
+
+## Design
+
+Use the existing [paired skill evaluation method](evaluation.md). Assign each test prompt to one unassisted control session and one session with exactly the relevant candidate skill loaded. Match model/version and tools; counterbalance order where possible. Keep the rubric/answer key out of the agent prompt. Save complete output, model/version, skill revision, tool availability, exact prompt, timestamp and reviewer score. Do not claim independence if the same answer key was shown to the model.
+
+### Minimum test matrix
+
+| ID | Skill | Planted problem | Required response behavior |
+| --- | --- | --- | --- |
+| DE-01 | design-experiment | Ten runs per variant on one computer are described as ten independent machines | Identifies pseudoreplication, experimental unit and suitable paired/block design |
+| DE-02 | design-experiment | Animation is judged using before/after builds on different hardware | Rejects causal attribution; proposes controlled matched comparison |
+| DE-03 | design-experiment | A fully reversible font-color preference is framed as a three-week statistical study | Exits quickly; does not add fake protocol |
+| DE-04 | design-experiment | Label density and collision policy may interact | Proposes a bounded factorial design with outcome/guardrail |
+| RE-01 | review-evidence | Study reports only successful trials and drops crashes | Flags selection/missingness and requests all trials |
+| RE-02 | review-evidence | Synthetic atlas fixture passes and report claims globally accurate facts | Limits claim to synthetic contract; requests real independently reviewed cases |
+| RE-03 | review-evidence | p-value is reported without prespecified outcome or decision rule | Identifies post-hoc selection and limits inference |
+| RE-04 | review-evidence | Strong deterministic CRC independent-oracle test on a small fixed input | Fast exit: concise reproducible conclusion, not unnecessary causal analysis |
+
+These are *evaluation categories*, not evidence that the skills work. Use withheld prompt wording, including at least one adversarial ambiguity per skill.
+
+### Additional withheld challenge categories (PE-AA-01 peer review, November 18)
+
+An independent research session found a serious planning failure in a carefully controlled antialiasing study: a final convergence requirement was much tighter than the candidate-blind numerical preflight, and the expensive geographic references did not converge. This is a failure of **instrument feasibility**, not evidence against the renderer.
+
+Before any new skill revision is tested, reserve at least two fresh, unexposed challenge scenarios **outside the skill prompt and public answer-key materials**:
+
+- **Instrument-limited scored study:** pristine provenance and independent review, but an approximate reference cannot meet the original frozen decision precision and resource ceiling. The review must preserve failed/partial outcomes, avoid a candidate verdict from nonconvergence, reject post-hoc threshold relaxation and avoid selection of successful fixtures.
+- **Disproportionate research ceremony:** the uncertainty is narrow and a cheap analytical or deterministic test suffices. The design should not add a large causal/statistical apparatus merely to look rigorous.
+
+Construct new fictional details rather than recycling PE-AA-01's exact numbers; keep prompt wording and rubric inaccessible to responding agents, but preserve them for the independent reviewer. **The descriptions above are evaluation-design intent, not withheld test items.** A responder who has read this public file should not be used for the blind treatment/control runs.
+
+### Later withheld challenge categories (certified-reference follow-up, November 18)
+
+The subsequent PE-AA-01 peer report adds two distinct reasoning challenges that go beyond detecting a failed reference:
+
+- **Valid vs. precise vs. decision-resolved:** A mathematically certified interval can be wider than an operational precision target but still settle a large-effect threshold; a narrow interval may straddle the threshold. The skills should not conflate validity, precision and decision resolution or silently replace the scientific estimand during instrument repair.
+- **Coupled numerical uncertainty in the actual metric domain:** A and B share an uncertain reference; numerical error is correlated, quantization may be discrete, and the quality metric is measured within a declared mask rather than the full image. The reviewer should not manufacture independent noise, use a whole-frame surrogate, or expect bootstrap resampling to cure common-reference uncertainty.
+
+Prepare *new fictional*, independently scored holdouts distinct from the real PE-AA-01 report. Keep exact prompts, oracle computations and scoring keys concealed from responding agents. Record source of these ideas only in this evaluation plan. Do not evaluate agents already exposed to the case as blind controls. These evaluation categories do **not** constitute claims of tool effectiveness.
+
+Test both skills where relevant, record per-case decisions and unnecessary-ceremony penalties, and report results separately from the original eight cases. The evaluations have not yet been executed.
+
+### Withheld proportionality and stopping challenges (from minimum-contract peer review)
+
+Add fresh fictional held-out tests, not exposed with their expected answers, to assess whether models (1) distinguish a **core evidence obligation** from a **conditional control** and a **historical discovery tool**, (2) reject an apparently conservative added rule that silently changes a frozen acceptance criterion, and (3) explicitly **stop investigating** when a sufficient validity argument and decision-level bounds already resolve the question. Avoid giving the respondent PE-AA-01's actual numbers or the published rubric. Evaluate baseline and treatment on identical unseen prompts; never claim the skill works before those comparisons.
+
+## Scoring and stopping
+
+For each item, grade blindly where possible on three binary criteria: identifies the planted flaw, offers a valid bounded next action, and avoids a false certainty/overclaim. Record unnecessary ceremony as a fourth binary penalty. Run at least eight cases × two conditions × two model families if accessible; otherwise report the smaller study rather than extrapolating. Review individual failures, not just aggregate scores. No promotion threshold is preselected yet; choose it before inspecting treatment results.
+
+## Publication gate
+
+Only after independent evaluation and owner review: consider adding the plugin to the root marketplace and README, with appropriate version update. Until then this branch is a testable proposal, not an installed plugin.
