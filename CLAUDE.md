@@ -2,7 +2,7 @@
 
 ## What this repo is
 
-Three Claude Code plugins (systems-analysis, break-things, text-utils) in a single repo with a shared marketplace. Each plugin is a top-level directory with its own `.claude-plugin/plugin.json` and `skills/` tree.
+Four Claude Code plugins (systems-analysis, break-things, text-utils, output-styles) in a single repo with a shared marketplace. Each plugin is a top-level directory with its own `.claude-plugin/plugin.json` and a `skills/` tree (or an `output-styles/` directory for output-styles).
 
 ## Structure
 
@@ -10,6 +10,7 @@ Three Claude Code plugins (systems-analysis, break-things, text-utils) in a sing
 systems-analysis/     # epistemic frameworks (R&I, requisite variety, causal analysis, staleness check)
 break-things/         # test design (what-to-test, is-it-tested)
 text-utils/           # text tools (fetch-markdown, markdown-to-pdf, pdf-to-text, riff, disfluent)
+output-styles/        # output styles (plain-dev); no skills, so the skill conventions below do not apply
 docs/                 # per-skill user-facing docs
 docs/internal/        # contributor-facing: evaluation methodology, open questions, interagent memos
 assets/               # static files

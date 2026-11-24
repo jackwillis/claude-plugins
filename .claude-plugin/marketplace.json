@@ -21,6 +21,11 @@
       "name": "break-things",
       "description": "Failure-mode-first test design: predict how code breaks, write the guard, mutate to verify.",
       "source": "./break-things"
+    },
+    {
+      "name": "output-styles",
+      "description": "Claude Code output styles. Plain dev: literal wording and a fixed final-report format for a developer who owns the code.",
+      "source": "./output-styles"
     }
   ]
 }

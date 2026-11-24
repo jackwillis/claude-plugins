@@ -61,9 +61,23 @@ Text extraction, conversion, and generation. Install:
 | Markdown to EPUB | `/markdown-to-epub` | "make an epub", "ebook version" |
 | PDF to text | `/pdf-to-text` | "read this PDF", scanned documents |
 
+### Output Styles
+
+Claude Code output styles. Install:
+
+```
+/plugin install output-styles@jackwillis
+```
+
+| Style | What it changes |
+|-------|-----------------|
+| Plain dev | Literal wording, references that stand alone, and a fixed final report (What changed, Why, Verified, Not verified, Noticed not changed) |
+
+After installing, select a style with `/config` (Output style).
+
 ### Marketplace
 
-All three plugins are in the same marketplace:
+All four plugins are in the same marketplace:
 
 ```
 /plugin marketplace add https://github.com/jackwillis/claude-plugins.git
