@@ -1,0 +1,16 @@
+{
+  "name": "output-styles",
+  "version": "0.1.0",
+  "description": "Claude Code output styles. Plain dev: literal wording, self-contained references, and a fixed final-report format for a developer who owns the code.",
+  "author": {
+    "name": "Jack Willis",
+    "email": "jack@attac.us"
+  },
+  "license": "MIT",
+  "keywords": [
+    "output-style",
+    "writing",
+    "reports",
+    "code-review"
+  ]
+}
